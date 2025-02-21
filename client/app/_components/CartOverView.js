@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 
 function CartOverView() {
   const { cart } = useSelector((store) => store.cart);
+
   if (!cart.length) return;
+
   const quantity = cart.reduce((a, b) => a + b.quantity, 0);
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
   return (

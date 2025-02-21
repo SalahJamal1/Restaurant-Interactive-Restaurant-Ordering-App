@@ -18,7 +18,7 @@ function LoginFrom() {
     const res = await signIn({ email, password });
     if (res.user) {
       dispatch(login(res.user));
-      router.push("/menu");
+      router.push("/cart");
     }
   }
   return (

@@ -29,5 +29,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { orderNow, Incorder, Decorder, ClearCart } = cartSlice.actions;
+export const { orderNow, Incorder, Decorder, ClearCart, DeleteItem } =
+  cartSlice.actions;
 export default cartSlice.reducer;

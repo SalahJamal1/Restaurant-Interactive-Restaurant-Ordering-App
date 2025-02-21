@@ -28,10 +28,7 @@ function MenuCard({ item }) {
   }
   const currentCart = cart.find((el) => el?.name === item?.name);
   return (
-    <li
-      key={item?.name}
-      className="bg-white h-[432px] w-[326px] grid grid-rows-[1fr,10rem] shadow-lg"
-    >
+    <li className="bg-white h-[432px] w-[326px] grid grid-rows-[1fr,10rem] shadow-lg">
       <div className="relative flex-1 overflow-hidden cursor-pointer">
         <Image
           fill

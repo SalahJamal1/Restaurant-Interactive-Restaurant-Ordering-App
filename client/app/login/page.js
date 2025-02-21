@@ -5,7 +5,7 @@ export const metadata = {
 };
 function Page() {
   return (
-    <div className="pt-24 flex flex-col items-center justify-center">
+    <div className="pt-24 pb-12 flex flex-col items-center justify-center">
       <span className="block text-base border-y border-[#FF9900] text-[#292E36] tracking-[2px] mb-4">
         LOGIN
       </span>

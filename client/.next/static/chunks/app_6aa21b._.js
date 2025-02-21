@@ -113,10 +113,10 @@ function CartOption({ currentCart }) {
     _s();
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "space-x-2 flex",
+        className: "space-x-2 flex items-center",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                onClick: ()=>dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Decorder"])(currentCart.name)),
+                onClick: ()=>dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Decorder"])(currentCart?.name)),
                 className: "bg-[#FF9900] text-white px-[9px] h-6 text-2xl rounded-full flex items-center",
                 children: "-"
             }, void 0, false, {
@@ -126,19 +126,28 @@ function CartOption({ currentCart }) {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                 className: "text-xl rounded-full",
-                children: currentCart.quantity
+                children: currentCart?.quantity
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartOption.js",
                 lineNumber: 16,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                onClick: ()=>dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Incorder"])(currentCart.name)),
+                onClick: ()=>dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Incorder"])(currentCart?.name)),
                 className: "bg-[#FF9900] text-white px-[6px] h-6 text-2xl rounded-full flex items-center",
                 children: "+"
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartOption.js",
                 lineNumber: 17,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                onClick: ()=>dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DeleteItem"])(currentCart?.name)),
+                className: "bg-[#FF9900] text-white px-[6px] h-6 text-xs rounded-full flex items-center",
+                children: "Delete"
+            }, void 0, false, {
+                fileName: "[project]/app/_components/CartOption.js",
+                lineNumber: 23,
                 columnNumber: 7
             }, this)
         ]
@@ -219,12 +228,12 @@ function MenuCard({ item }) {
                     className: "flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-150"
                 }, void 0, false, {
                     fileName: "[project]/app/_components/MenuCard.js",
-                    lineNumber: 36,
+                    lineNumber: 33,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/_components/MenuCard.js",
-                lineNumber: 35,
+                lineNumber: 32,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -238,7 +247,7 @@ function MenuCard({ item }) {
                                 children: item.name
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 47,
+                                lineNumber: 44,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -249,13 +258,13 @@ function MenuCard({ item }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 48,
+                                lineNumber: 45,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 46,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -263,7 +272,7 @@ function MenuCard({ item }) {
                         children: ingredients
                     }, void 0, false, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 53,
+                        lineNumber: 50,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -277,7 +286,7 @@ function MenuCard({ item }) {
                                         children: "5.0"
                                     }, void 0, false, {
                                         fileName: "[project]/app/_components/MenuCard.js",
-                                        lineNumber: 58,
+                                        lineNumber: 55,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -287,30 +296,30 @@ function MenuCard({ item }) {
                                         }, (_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$io5$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IoStarSharp"], {}, void 0, false, {
                                                     fileName: "[project]/app/_components/MenuCard.js",
-                                                    lineNumber: 63,
+                                                    lineNumber: 60,
                                                     columnNumber: 19
                                                 }, this)
                                             }, i, false, {
                                                 fileName: "[project]/app/_components/MenuCard.js",
-                                                lineNumber: 62,
+                                                lineNumber: 59,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/_components/MenuCard.js",
-                                        lineNumber: 60,
+                                        lineNumber: 57,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 57,
+                                lineNumber: 54,
                                 columnNumber: 11
                             }, this),
                             currentCart ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartOption$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 currentCart: currentCart
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 70,
+                                lineNumber: 67,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: addToCart,
@@ -318,23 +327,23 @@ function MenuCard({ item }) {
                                 children: "order now"
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 72,
+                                lineNumber: 69,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 56,
+                        lineNumber: 53,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/MenuCard.js",
-                lineNumber: 45,
+                lineNumber: 42,
                 columnNumber: 7
             }, this)
         ]
-    }, item?.name, true, {
+    }, void 0, true, {
         fileName: "[project]/app/_components/MenuCard.js",
         lineNumber: 31,
         columnNumber: 5

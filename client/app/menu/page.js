@@ -5,8 +5,8 @@ import Spinner from "../_components/Spinner";
 export const metadata = {
   title: "Menu - RestoNest",
 };
-function Page({ searchParams }) {
-  const item = searchParams?.item ?? "pizza";
+async function Page({ searchParams }) {
+  const item = (await searchParams?.item) ?? "pizza";
   return (
     <div className="py-12">
       <div className="flex items-center flex-col">
