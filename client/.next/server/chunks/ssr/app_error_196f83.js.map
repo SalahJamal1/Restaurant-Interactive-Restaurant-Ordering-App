@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/salah/Downloads/restaurant/client/app/error.js"],"sourcesContent":["\"use client\";\nfunction error({ error, reset }) {\n  return (\n    <div className=\"py-12 flex flex-col h-full w-full items-center left-0 absolute capitalize space-y-4\">\n      <h2 className=\"text-2xl text-center w-1/2\">{error.message}</h2>\n      <button onClick={reset} className=\"bg-[#FF9900] px-2 py-1 text-base\">\n        try again\n      </button>\n    </div>\n  );\n}\n\nexport default error;\n"],"names":[],"mappings":";;;;AAAA;;AACA,SAAS,MAAM,EAAE,KAAK,EAAE,KAAK,EAAE;IAC7B,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;gBAAG,WAAU;0BAA8B,MAAM,OAAO;;;;;;0BACzD,8OAAC;gBAAO,SAAS;gBAAO,WAAU;0BAAmC;;;;;;;;;;;;AAK3E;uCAEe"}},
-    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
