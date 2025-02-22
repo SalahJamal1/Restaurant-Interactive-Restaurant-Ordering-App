@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
         if (jwt == null || jwt.isBlank()) {
-            if (request.getRequestURI().matches("^/api/v1/auth/.*$") || request.getRequestURI().startsWith("/api/v1/menu")) {
+            if (request.getRequestURI().matches("^/api/v1/auth/.*$") || request.getRequestURI().startsWith("/api/v1/menu") || request.getRequestURI().startsWith("/api/v1/orders")) {
                 filterChain.doFilter(request, response);
                 return;
             } else {

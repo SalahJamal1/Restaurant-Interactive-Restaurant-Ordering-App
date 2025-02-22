@@ -6,27 +6,14 @@ const links = [
   {
     link: "/",
     name: "Home",
-    active: false,
   },
   {
     link: "/menu",
     name: "menu",
-    active: false,
   },
   {
     link: "/about",
     name: "about",
-    active: false,
-  },
-  {
-    link: "/account",
-    name: "account",
-    active: true,
-  },
-  {
-    link: "/login",
-    name: "login",
-    active: false,
   },
 ];
 function Navigation() {
@@ -39,13 +26,21 @@ function Navigation() {
         <li
           key={el.name}
           className={`${
-            pathname === el.link ? " text-[#FF9900] border-b" : ""
+            pathname === el.link
+              ? " text-[#FF9900] border-b-2 border-[#FF9900]"
+              : ""
           }`}
         >
-          <Link href={el.link}>{el.name}</Link>
+          {<Link href={el.link}>{el.name}</Link>}
         </li>
       ))}
-      <li>
+      <li
+        className={`${
+          pathname === "/account"
+            ? " text-[#FF9900] border-b-2 border-[#FF9900]"
+            : ""
+        }`}
+      >
         <Link
           href={Auth ? `/account` : "/login"}
           className={`${Auth ? "" : "bg-[#FF9900] px-4 py-2 rounded-md"}`}

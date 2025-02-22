@@ -75,6 +75,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$logo$2e$png$2e$mjs
 ;
 function Logo() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex items-center justify-center flex-col",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 href: "/",
@@ -135,28 +136,15 @@ var _s = __turbopack_refresh__.signature();
 const links = [
     {
         link: "/",
-        name: "Home",
-        active: false
+        name: "Home"
     },
     {
         link: "/menu",
-        name: "menu",
-        active: false
+        name: "menu"
     },
     {
         link: "/about",
-        name: "about",
-        active: false
-    },
-    {
-        link: "/account",
-        name: "account",
-        active: true
-    },
-    {
-        link: "/login",
-        name: "login",
-        active: false
+        name: "about"
     }
 ];
 function Navigation() {
@@ -169,39 +157,40 @@ function Navigation() {
         className: "flex space-x-12 capitalize text-xl text-[#FFF7EA]",
         children: [
             links.map((el)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                    className: `${pathname === el.link ? " text-[#FF9900] border-b" : ""}`,
+                    className: `${pathname === el.link ? " text-[#FF9900] border-b-2 border-[#FF9900]" : ""}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         href: el.link,
                         children: el.name
                     }, void 0, false, {
                         fileName: "[project]/app/_components/Navigation.js",
-                        lineNumber: 45,
-                        columnNumber: 11
+                        lineNumber: 34,
+                        columnNumber: 12
                     }, this)
                 }, el.name, false, {
                     fileName: "[project]/app/_components/Navigation.js",
-                    lineNumber: 39,
+                    lineNumber: 26,
                     columnNumber: 9
                 }, this)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                className: `${pathname === "/account" ? " text-[#FF9900] border-b-2 border-[#FF9900]" : ""}`,
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                     href: Auth ? `/account` : "/login",
                     className: `${Auth ? "" : "bg-[#FF9900] px-4 py-2 rounded-md"}`,
                     children: Auth ? "Account" : "Login"
                 }, void 0, false, {
                     fileName: "[project]/app/_components/Navigation.js",
-                    lineNumber: 49,
+                    lineNumber: 44,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/_components/Navigation.js",
-                lineNumber: 48,
+                lineNumber: 37,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/_components/Navigation.js",
-        lineNumber: 37,
+        lineNumber: 24,
         columnNumber: 5
     }, this);
 }
@@ -235,7 +224,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$Naviga
 ;
 function Header() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-        className: "bg-black border-b border-slate-200 shadow-lg h-[17vh]",
+        className: "bg-black border-b border-slate-200 shadow-lg h-[18vh]",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
             className: "max-w-6xl mx-auto py-3 flex items-center justify-between",
             children: [
@@ -504,6 +493,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({
+    "createOrders": (()=>createOrders),
     "getCurrent": (()=>getCurrent),
     "getMenu": (()=>getMenu),
     "signIn": (()=>signIn),
@@ -551,6 +541,15 @@ async function signup(data) {
 async function getCurrent() {
     try {
         const res = await api.get("auth/current");
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function createOrders(data) {
+    console.log(data);
+    try {
+        const res = await api.post("/orders", data);
         return res.data;
     } catch (err) {
         console.log(err);

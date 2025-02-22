@@ -3,7 +3,7 @@ import Link from "next/link";
 import logo from "@/public/logo.png";
 function Logo() {
   return (
-    <div>
+    <div className="flex items-center justify-center flex-col">
       <Link href="/">
         <Image src={logo} className="w-20 h-16" alt="logo" />
       </Link>

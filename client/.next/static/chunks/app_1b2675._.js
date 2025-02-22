@@ -37,7 +37,7 @@ function LoginFrom() {
             email,
             password
         });
-        if (res.user) {
+        if (res?.user) {
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$login$2f$userSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["login"])(res.user));
             router.push("/cart");
         }

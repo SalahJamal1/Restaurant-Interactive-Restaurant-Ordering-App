@@ -203,7 +203,6 @@ function MenuCard({ item }) {
         e.preventDefault();
         if (!item) return;
         const newOrder = {
-            id: item.id,
             name: item.name,
             unitPrice: item.unitPrice,
             imageUrl: item.imageUrl,
@@ -228,12 +227,12 @@ function MenuCard({ item }) {
                     className: "flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-150"
                 }, void 0, false, {
                     fileName: "[project]/app/_components/MenuCard.js",
-                    lineNumber: 33,
+                    lineNumber: 32,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/_components/MenuCard.js",
-                lineNumber: 32,
+                lineNumber: 31,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -247,7 +246,7 @@ function MenuCard({ item }) {
                                 children: item.name
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 44,
+                                lineNumber: 43,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -258,13 +257,13 @@ function MenuCard({ item }) {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 45,
+                                lineNumber: 44,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 43,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -272,7 +271,7 @@ function MenuCard({ item }) {
                         children: ingredients
                     }, void 0, false, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 50,
+                        lineNumber: 49,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -286,7 +285,7 @@ function MenuCard({ item }) {
                                         children: "5.0"
                                     }, void 0, false, {
                                         fileName: "[project]/app/_components/MenuCard.js",
-                                        lineNumber: 55,
+                                        lineNumber: 54,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -296,30 +295,30 @@ function MenuCard({ item }) {
                                         }, (_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$io5$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["IoStarSharp"], {}, void 0, false, {
                                                     fileName: "[project]/app/_components/MenuCard.js",
-                                                    lineNumber: 60,
+                                                    lineNumber: 59,
                                                     columnNumber: 19
                                                 }, this)
                                             }, i, false, {
                                                 fileName: "[project]/app/_components/MenuCard.js",
-                                                lineNumber: 59,
+                                                lineNumber: 58,
                                                 columnNumber: 17
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/_components/MenuCard.js",
-                                        lineNumber: 57,
+                                        lineNumber: 56,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 54,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, this),
                             currentCart ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartOption$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 currentCart: currentCart
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 67,
+                                lineNumber: 66,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                 onClick: addToCart,
@@ -327,25 +326,25 @@ function MenuCard({ item }) {
                                 children: "order now"
                             }, void 0, false, {
                                 fileName: "[project]/app/_components/MenuCard.js",
-                                lineNumber: 69,
+                                lineNumber: 68,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/MenuCard.js",
-                        lineNumber: 53,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/MenuCard.js",
-                lineNumber: 42,
+                lineNumber: 41,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/_components/MenuCard.js",
-        lineNumber: 31,
+        lineNumber: 30,
         columnNumber: 5
     }, this);
 }

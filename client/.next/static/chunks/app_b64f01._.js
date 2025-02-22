@@ -24,15 +24,19 @@ function SignUpFrom() {
     const [password, setPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [firstName, setfirstName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [lastName, setlastName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [address, setAddress] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [phone, setPhone] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     async function handelSubmit(e) {
         e.preventDefault();
-        if (!email && !password && !firstName && !lastName) return;
+        if (!email && !password && !firstName && !lastName && !address && !phone) return;
         const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_lib$2f$apiResto$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signup"])({
-            email,
-            password,
             firstName,
-            lastName
+            lastName,
+            address,
+            phone,
+            email,
+            password
         });
         if (res.user) router.push("/login");
     }
@@ -48,7 +52,7 @@ function SignUpFrom() {
                         children: "First Name"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 26,
+                        lineNumber: 36,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -59,13 +63,13 @@ function SignUpFrom() {
                         onChange: (e)=>setfirstName(e.target.value)
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 29,
+                        lineNumber: 39,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/SignUpFrom.js",
-                lineNumber: 25,
+                lineNumber: 35,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -75,7 +79,7 @@ function SignUpFrom() {
                         children: "last Name"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 38,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -86,13 +90,69 @@ function SignUpFrom() {
                         onChange: (e)=>setlastName(e.target.value)
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 41,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/SignUpFrom.js",
-                lineNumber: 37,
+                lineNumber: 47,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                        className: "block capitalize text-xl tracking-widest mb-2",
+                        children: "address"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SignUpFrom.js",
+                        lineNumber: 60,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        type: "text",
+                        className: "block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]",
+                        placeholder: "Address",
+                        required: true,
+                        value: address,
+                        onChange: (e)=>setAddress(e.target.value)
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SignUpFrom.js",
+                        lineNumber: 63,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/_components/SignUpFrom.js",
+                lineNumber: 59,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                        className: "block capitalize text-xl tracking-widest mb-2",
+                        children: "Phone"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SignUpFrom.js",
+                        lineNumber: 73,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        type: "Phone",
+                        className: "block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]",
+                        required: true,
+                        placeholder: "Phone",
+                        value: phone,
+                        onChange: (e)=>setPhone(e.target.value)
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SignUpFrom.js",
+                        lineNumber: 76,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/_components/SignUpFrom.js",
+                lineNumber: 72,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -105,7 +165,7 @@ function SignUpFrom() {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 50,
+                        lineNumber: 86,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -117,41 +177,42 @@ function SignUpFrom() {
                         onChange: (e)=>setEmail(e.target.value)
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 53,
+                        lineNumber: 89,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/SignUpFrom.js",
-                lineNumber: 49,
+                lineNumber: 85,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "mb-4",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                         className: "block capitalize text-xl tracking-widest mb-2",
                         children: "password"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 63,
+                        lineNumber: 99,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         type: "password",
-                        className: "block mb-12 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]",
+                        className: "block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]",
                         required: true,
                         placeholder: "Password",
                         value: password,
                         onChange: (e)=>setPassword(e.target.value)
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SignUpFrom.js",
-                        lineNumber: 66,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/SignUpFrom.js",
-                lineNumber: 62,
+                lineNumber: 98,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -159,17 +220,17 @@ function SignUpFrom() {
                 children: "SignUp"
             }, void 0, false, {
                 fileName: "[project]/app/_components/SignUpFrom.js",
-                lineNumber: 75,
+                lineNumber: 111,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/_components/SignUpFrom.js",
-        lineNumber: 20,
+        lineNumber: 30,
         columnNumber: 5
     }, this);
 }
-_s(SignUpFrom, "t/FnO0SsjWIS/2AhQOZkfKRjZuE=", false, function() {
+_s(SignUpFrom, "WgwUxPmXud6FZGZqKQS6EC06GYs=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

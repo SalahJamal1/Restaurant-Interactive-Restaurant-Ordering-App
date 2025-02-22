@@ -20,10 +20,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.cors(c -> c.configurationSource(corsConfigurationSource))
-                .csrf(c -> c.ignoringRequestMatchers("/api/v1/auth/**"))
+        httpSecurity
+                .cors(c -> c.configurationSource(corsConfigurationSource))
+                .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> auth.
                         requestMatchers("/api/v1/menu", "api/v1/menu/**").permitAll()
+                        .requestMatchers("/api/v1/orders/**").permitAll()
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

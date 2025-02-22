@@ -1,5 +1,6 @@
 package com.app.restaurant.user;
 
+import com.app.restaurant.order.Orders;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -36,10 +37,19 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
-
+    @Column(name = "address")
+    @NotBlank
+    private String address;
+    @Column(name = "phone")
+    @NotBlank
+    private String phone;
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<Orders> orders;
 
 
     @Override

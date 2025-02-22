@@ -6,7 +6,7 @@ export const metadata = {
 
 function Page() {
   return (
-    <div className="pt-24 flex flex-col items-center justify-center flex-1">
+    <div className="pt-12 flex flex-col items-center justify-center flex-1">
       <span className="block text-base border-y border-[#FF9900] text-[#292E36] tracking-[2px] mb-4">
         SignUp
       </span>

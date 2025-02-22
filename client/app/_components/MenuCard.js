@@ -16,7 +16,6 @@ function MenuCard({ item }) {
     e.preventDefault();
     if (!item) return;
     const newOrder = {
-      id: item.id,
       name: item.name,
       unitPrice: item.unitPrice,
       imageUrl: item.imageUrl,

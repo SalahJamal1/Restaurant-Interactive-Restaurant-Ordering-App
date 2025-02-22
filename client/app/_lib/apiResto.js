@@ -44,3 +44,12 @@ export async function getCurrent() {
     console.log(err);
   }
 }
+export async function createOrders(data) {
+  console.log(data);
+  try {
+    const res = await api.post("/orders", data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}

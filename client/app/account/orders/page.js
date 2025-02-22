@@ -1,5 +1,11 @@
+import OrderList from "@/app/_components/OrderList";
+
 function Page() {
-  return <div>order</div>;
+  return (
+    <div>
+      <OrderList />
+    </div>
+  );
 }
 
 export default Page;

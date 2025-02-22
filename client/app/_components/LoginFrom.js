@@ -16,7 +16,7 @@ function LoginFrom() {
 
     if (!email && !password) return;
     const res = await signIn({ email, password });
-    if (res.user) {
+    if (res?.user) {
       dispatch(login(res.user));
       router.push("/cart");
     }

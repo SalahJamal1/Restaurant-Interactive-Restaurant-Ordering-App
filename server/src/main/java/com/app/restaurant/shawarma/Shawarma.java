@@ -20,7 +20,7 @@ public class Shawarma {
     @Column(name = "id")
     private Integer id;
     @Column(name = "name")
-    private String Name;
+    private String name;
     @Column(name = "unit_price")
     private float unitPrice;
     @Column(name = "image_url")

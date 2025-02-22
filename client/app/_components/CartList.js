@@ -1,20 +1,36 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartMessage from "./CartMessage";
 
 import Link from "next/link";
 import CartItem from "./CartItem";
+import { useRouter } from "next/navigation";
+import { createOrders } from "../_lib/apiResto";
+import { ClearCart } from "../_store/cartSlice";
 
 function CartList() {
+  const router = useRouter();
   const { cart } = useSelector((store) => store.cart);
   const { user, Auth } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
   if (!cart.length) return <CartMessage />;
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
+  async function handelCreateOrder(e) {
+    e.preventDefault();
+    const newOrder = {
+      cart,
+      orderPrice: totalPrice,
+    };
+    const res = await createOrders(newOrder);
+    router.push("/");
+    dispatch(ClearCart());
+  }
+
   return (
-    <div className="py-12 space-y-12">
+    <div className="py-12 space-y-8 px-12">
       <Link
         href="/menu"
-        className="text-blue-600 font-semibold tracking-widest capitalize border-b-2 border-blue-600 pb-1 duration-150 transition-all hover:border-none"
+        className="font-semibold tracking-widest capitalize border-b-2 border-black pb-1 duration-150 transition-all hover:border-none"
       >
         Back to menu
       </Link>
@@ -33,7 +49,10 @@ function CartList() {
           <p className="border-y border-[#FF9900] py-[3px] capitalize pr-3">
             Your Cart, {user?.firstName} – Ready for checkout?
           </p>
-          <button className="bg-[#FF9900] text-white px-3 py-1 capitalize">
+          <button
+            className="bg-[#FF9900] text-white px-3 py-1 capitalize"
+            onClick={handelCreateOrder}
+          >
             Click Order Now
           </button>
         </div>

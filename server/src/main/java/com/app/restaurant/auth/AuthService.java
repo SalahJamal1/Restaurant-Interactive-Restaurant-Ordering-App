@@ -25,12 +25,13 @@ public class AuthService {
 
 
     public AuthResponse register(AuthRegister register, HttpServletResponse response) {
+        System.out.println(register);
         var user = User.builder().role(Role.ROLE_USER)
                 .password(passwordEncoder
                         .encode(register.getPassword()))
                 .email(register.getEmail())
                 .firstName(register.getFirstName())
-                .lastName(register.getLastName()).build();
+                .lastName(register.getLastName()).address(register.getAddress()).phone(register.getPhone()).build();
         userRepository.save(user);
         String jwt = jwtService.generateToken(user);
         setCookie(jwt, response);

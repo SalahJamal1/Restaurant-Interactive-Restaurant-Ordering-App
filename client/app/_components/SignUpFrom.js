@@ -8,12 +8,22 @@ function SignUpFrom() {
   const [password, setPassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const router = useRouter();
   async function handelSubmit(e) {
     e.preventDefault();
 
-    if (!email && !password && !firstName && !lastName) return;
-    const res = await signup({ email, password, firstName, lastName });
+    if (!email && !password && !firstName && !lastName && !address && !phone)
+      return;
+    const res = await signup({
+      firstName,
+      lastName,
+      address,
+      phone,
+      email,
+      password,
+    });
     if (res.user) router.push("/login");
   }
   return (
@@ -48,6 +58,32 @@ function SignUpFrom() {
       </div>
       <div>
         <label className="block capitalize text-xl tracking-widest mb-2">
+          address
+        </label>
+        <input
+          type="text"
+          className="block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]"
+          placeholder="Address"
+          required
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+      </div>
+      <div>
+        <label className="block capitalize text-xl tracking-widest mb-2">
+          Phone
+        </label>
+        <input
+          type="Phone"
+          className="block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]"
+          required
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+      </div>
+      <div>
+        <label className="block capitalize text-xl tracking-widest mb-2">
           email{" "}
         </label>
         <input
@@ -59,13 +95,13 @@ function SignUpFrom() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
+      <div className="mb-4">
         <label className="block capitalize text-xl tracking-widest mb-2">
           password
         </label>
         <input
           type="password"
-          className="block mb-12 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]"
+          className="block mb-4 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]"
           required
           placeholder="Password"
           value={password}

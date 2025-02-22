@@ -18,7 +18,7 @@ function CartMessage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 href: "/menu",
-                className: "text-blue-600 font-semibold tracking-widest capitalize border-b-2 border-blue-600 pb-1 duration-150 transition-all hover:border-none",
+                className: "font-semibold tracking-widest capitalize border-b-2 border-black pb-1 duration-150 transition-all hover:border-none",
                 children: "Back to menu"
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartMessage.js",
@@ -275,6 +275,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartMessage$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_components/CartMessage.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartItem$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_components/CartItem.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_lib$2f$apiResto$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_lib/apiResto.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_store/cartSlice.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-ssr] (ecmascript)");
 "use client";
 ;
@@ -282,25 +285,40 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 ;
 ;
 ;
+;
+;
+;
 function CartList() {
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const { cart } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((store)=>store.cart);
     const { user, Auth } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((store)=>store.user);
+    const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
     if (!cart.length) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartMessage$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/_components/CartList.js",
-        lineNumber: 11,
+        lineNumber: 16,
         columnNumber: 28
     }, this);
     const totalPrice = cart.reduce((a, b)=>a + b.totalPrice, 0);
+    async function handelCreateOrder(e) {
+        e.preventDefault();
+        const newOrder = {
+            cart,
+            orderPrice: totalPrice
+        };
+        const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_lib$2f$apiResto$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createOrders"])(newOrder);
+        router.push("/");
+        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ClearCart"])());
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "py-12 space-y-12",
+        className: "py-12 space-y-8 px-12",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 href: "/menu",
-                className: "text-blue-600 font-semibold tracking-widest capitalize border-b-2 border-blue-600 pb-1 duration-150 transition-all hover:border-none",
+                className: "font-semibold tracking-widest capitalize border-b-2 border-black pb-1 duration-150 transition-all hover:border-none",
                 children: "Back to menu"
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 15,
+                lineNumber: 31,
                 columnNumber: 7
             }, this),
             !Auth ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -312,14 +330,14 @@ function CartList() {
                         children: "Login"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 23,
+                        lineNumber: 39,
                         columnNumber: 11
                     }, this),
                     "To Let’s Start Your Dinner With Us"
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 22,
+                lineNumber: 38,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex items-start  justify-center",
@@ -333,21 +351,22 @@ function CartList() {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 33,
+                        lineNumber: 49,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         className: "bg-[#FF9900] text-white px-3 py-1 capitalize",
+                        onClick: handelCreateOrder,
                         children: "Click Order Now"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 36,
+                        lineNumber: 52,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 32,
+                lineNumber: 48,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -356,18 +375,18 @@ function CartList() {
                         item: item
                     }, item.name, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 44,
+                        lineNumber: 63,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 42,
+                lineNumber: 61,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/_components/CartList.js",
-        lineNumber: 14,
+        lineNumber: 30,
         columnNumber: 5
     }, this);
 }

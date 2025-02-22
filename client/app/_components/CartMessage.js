@@ -5,7 +5,7 @@ function CartMessage() {
     <div className="pt-12 space-y-12">
       <Link
         href="/menu"
-        className="text-blue-600 font-semibold tracking-widest capitalize border-b-2 border-blue-600 pb-1 duration-150 transition-all hover:border-none"
+        className="font-semibold tracking-widest capitalize border-b-2 border-black pb-1 duration-150 transition-all hover:border-none"
       >
         Back to menu
       </Link>
