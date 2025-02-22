@@ -125,6 +125,7 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 {
 __turbopack_esm__({
     "createOrders": (()=>createOrders),
+    "deleteOrderById": (()=>deleteOrderById),
     "getCurrent": (()=>getCurrent),
     "getMenu": (()=>getMenu),
     "signIn": (()=>signIn),
@@ -178,9 +179,17 @@ async function getCurrent() {
     }
 }
 async function createOrders(data) {
-    console.log(data);
     try {
         const res = await api.post("/orders", data);
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function deleteOrderById(id) {
+    try {
+        const res = await api.delete(`/orders/${id}`);
+        console.log(res);
         return res.data;
     } catch (err) {
         console.log(err);

@@ -312,10 +312,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartIt
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_lib$2f$apiResto$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_lib/apiResto.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_store/cartSlice.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$orderSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/app/_store/orderSlice.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_refresh__.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -335,7 +337,7 @@ function CartList() {
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"])();
     if (!cart.length) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_components$2f$CartMessage$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
         fileName: "[project]/app/_components/CartList.js",
-        lineNumber: 16,
+        lineNumber: 17,
         columnNumber: 28
     }, this);
     const totalPrice = cart.reduce((a, b)=>a + b.totalPrice, 0);
@@ -346,8 +348,9 @@ function CartList() {
             orderPrice: totalPrice
         };
         const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_lib$2f$apiResto$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createOrders"])(newOrder);
-        router.push("/");
+        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$orderSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addOrder"])(res));
         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ClearCart"])());
+        router.push("/account/orders");
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "py-12 space-y-8 px-12",
@@ -358,7 +361,7 @@ function CartList() {
                 children: "Back to menu"
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 31,
+                lineNumber: 33,
                 columnNumber: 7
             }, this),
             !Auth ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -370,14 +373,14 @@ function CartList() {
                         children: "Login"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 39,
+                        lineNumber: 41,
                         columnNumber: 11
                     }, this),
                     "To Let’s Start Your Dinner With Us"
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 38,
+                lineNumber: 40,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex items-start  justify-center",
@@ -391,7 +394,7 @@ function CartList() {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 49,
+                        lineNumber: 51,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -400,13 +403,13 @@ function CartList() {
                         children: "Click Order Now"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 52,
+                        lineNumber: 54,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 48,
+                lineNumber: 50,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -415,18 +418,18 @@ function CartList() {
                         item: item
                     }, item.name, false, {
                         fileName: "[project]/app/_components/CartList.js",
-                        lineNumber: 63,
+                        lineNumber: 65,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/app/_components/CartList.js",
-                lineNumber: 61,
+                lineNumber: 63,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/_components/CartList.js",
-        lineNumber: 30,
+        lineNumber: 32,
         columnNumber: 5
     }, this);
 }

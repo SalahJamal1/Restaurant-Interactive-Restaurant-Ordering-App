@@ -1,3 +1,4 @@
+"use client";
 import { useDispatch } from "react-redux";
 import { getCurrent } from "@/app/_lib/apiResto";
 import { getUser } from "@/app/login/userSlice";

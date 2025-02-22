@@ -17,7 +17,7 @@ function SideBar() {
     }
   }
   return (
-    <ul className="border-r border-black h-screen pt-12 pr-12 space-y-8">
+    <ul className="border-r border-black pt-12 pr-12 space-y-8 h-[82vh]">
       <li>
         <Link
           href="/account"

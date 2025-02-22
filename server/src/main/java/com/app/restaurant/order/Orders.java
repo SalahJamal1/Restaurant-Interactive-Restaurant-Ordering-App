@@ -31,7 +31,7 @@ public class Orders {
     @Column(name = "customer_name")
     private String customerName;
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private List<Cart> cart;
     @Column(name = "address")

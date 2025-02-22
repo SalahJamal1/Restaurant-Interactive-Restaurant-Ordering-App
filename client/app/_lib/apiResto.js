@@ -45,9 +45,17 @@ export async function getCurrent() {
   }
 }
 export async function createOrders(data) {
-  console.log(data);
   try {
     const res = await api.post("/orders", data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+export async function deleteOrderById(id) {
+  try {
+    const res = await api.delete(`/orders/${id}`);
+    console.log(res);
     return res.data;
   } catch (err) {
     console.log(err);

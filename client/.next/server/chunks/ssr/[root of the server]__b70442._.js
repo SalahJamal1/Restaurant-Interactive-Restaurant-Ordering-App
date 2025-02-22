@@ -466,10 +466,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f
 ;
 ;
 ;
+;
 const store = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["configureStore"])({
     reducer: {
         user: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$login$2f$userSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"],
-        cart: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"]
+        cart: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"],
+        order: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_store$2f$cartSlice$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"]
     }
 });
 }}),
@@ -576,6 +578,7 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 {
 __turbopack_esm__({
     "createOrders": (()=>createOrders),
+    "deleteOrder": (()=>deleteOrder),
     "getCurrent": (()=>getCurrent),
     "getMenu": (()=>getMenu),
     "signIn": (()=>signIn),
@@ -629,9 +632,16 @@ async function getCurrent() {
     }
 }
 async function createOrders(data) {
-    console.log(data);
     try {
         const res = await api.post("/orders", data);
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function deleteOrder(id) {
+    try {
+        const res = await api.delete(`/orders/${id}`);
         return res.data;
     } catch (err) {
         console.log(err);

@@ -6,7 +6,7 @@ function Layout({ children }) {
     <div className="grid grid-cols-[auto,1fr] gap-12">
       <ProtectPage>
         <SideBar />
-        <div className="pt-12">{children}</div>
+        <div className="pt-4">{children}</div>
       </ProtectPage>
     </div>
   );

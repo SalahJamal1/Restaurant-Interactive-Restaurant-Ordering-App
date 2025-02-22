@@ -1,39 +1,98 @@
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { deleteOrderById } from "../_lib/apiResto";
+import { DeleteOrder } from "../_store/orderSlice";
+import UserLoader from "./UserLoader";
 
+function formatDate(date) {
+  return Intl.DateTimeFormat("en-us", {
+    year: "2-digit",
+    month: "long",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(new Date(date));
+}
 function OrderItem({ order }) {
-  console.log(order);
+  const dispatch = useDispatch();
+  async function handelDeleteOrder(e) {
+    e.preventDefault();
+    const res = await deleteOrderById(order.id);
+
+    dispatch(DeleteOrder(order.id));
+  }
+  const x =
+    new Date(order.estimatedDelivery).getMinutes() - new Date().getMinutes();
   return (
-    <li className="flex py-4">
-      <div className="px-5 pt-4 flex-grow">
-        <div className="flex justify-between">
-          <div className="flex space-x-4 flex-grow">
-            <div className="relative aspect-square">
-              <Image
-                fill
-                src={order.imageUrl}
-                alt={order.name}
-                className="object-cover rounded-full"
-              />
-            </div>
-            <div className="space-y-4  flex-1">
-              <h2 className="text-base flex orders-center gap-2">
-                <span className="text-xl">{order?.quantity}x</span>
-                {order?.name}
-              </h2>
-              <p className="text-base capitalize orders-center gap-1 flex-1">
-                price <span className="font-bold">${order?.unitPrice}</span>
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col orders-center space-y-4">
-            <span className="flex orders-center text-xl gap-8">
-              <span className="font-bold text-base">Total: </span>$
-              {Math.round(order?.orderPrice)}
+    <div className="border-2 border-[#FF9900]">
+      <UserLoader />
+      <div className="py-3 px-8">
+        <div className="flex items-center justify-between mb-4 p-2">
+          <span className="text-base font-semibold">
+            Order {order.id} Status
+          </span>
+          <div>
+            <span
+              className={`${
+                order.status === "Delivered" ? "bg-green-500 " : "bg-red-600"
+              } py-1 px-2 text-slate-100 capitalize rounded-full`}
+            >
+              {order.status}
             </span>
+            {!order.actualDelivery && (
+              <button
+                className="bg-red-600 py-1 px-2 text-slate-100 capitalize rounded-full ml-2"
+                onClick={handelDeleteOrder}
+              >
+                cancel
+              </button>
+            )}
           </div>
         </div>
+        <div className="flex items-center justify-between mb-4 bg-[#FF9900] text-white p-2">
+          <span className="text-sm font-semibold">
+            {order.actualDelivery !== null
+              ? "Your order has been successfully delivered."
+              : `Only ${x} minutes left 😃`}
+          </span>
+          <span className="text-sm font-semibold">
+            {order.actualDelivery !== null
+              ? "Thank you for ordering with us. 🚀❤️"
+              : `Estimated delivery: ${formatDate(order.estimatedDelivery)}`}
+          </span>
+        </div>
+        <div className="flex items-center justify-between mb-4 p-2">
+          <span className="text-xl flex items-center gap-4">
+            Total:
+            <span className="text-2xl">${order.orderPrice}</span>
+          </span>
+          <span className="text-sm font-semibold capitalize">
+            location: {order.address}
+          </span>
+        </div>
+        <ul className="flex flex-col divide-y divide-slate-300 space-y-4">
+          {order?.cart?.map((item) => (
+            <li key={item.id} className="flex items-center space-x-4 py-2">
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                width="50"
+                height="50"
+                className="object-cover object-center rounded-full"
+              />
+              <div className="flex flex-col space-y-2">
+                <p className="flex items-center gap-2">
+                  <span className="text-xl">{item.quantity}x</span>
+                  <span className="font-semibold">{item.name}</span>
+                </p>
+                <p className="capitalize italic text-sm">{item.ingredients}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    </li>
+    </div>
   );
 }
 

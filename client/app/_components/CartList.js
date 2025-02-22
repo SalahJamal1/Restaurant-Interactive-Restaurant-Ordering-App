@@ -7,6 +7,7 @@ import CartItem from "./CartItem";
 import { useRouter } from "next/navigation";
 import { createOrders } from "../_lib/apiResto";
 import { ClearCart } from "../_store/cartSlice";
+import { addOrder } from "../_store/orderSlice";
 
 function CartList() {
   const router = useRouter();
@@ -22,8 +23,9 @@ function CartList() {
       orderPrice: totalPrice,
     };
     const res = await createOrders(newOrder);
-    router.push("/");
+    dispatch(addOrder(res));
     dispatch(ClearCart());
+    router.push("/account/orders");
   }
 
   return (
