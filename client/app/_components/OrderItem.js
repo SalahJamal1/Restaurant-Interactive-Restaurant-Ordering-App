@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { deleteOrderById } from "../_lib/apiResto";
 import { DeleteOrder } from "../_store/orderSlice";
 import UserLoader from "./UserLoader";
+import toast from "react-hot-toast";
 
 function formatDate(date) {
   return Intl.DateTimeFormat("en-us", {
@@ -19,8 +20,10 @@ function OrderItem({ order }) {
   async function handelDeleteOrder(e) {
     e.preventDefault();
     const res = await deleteOrderById(order.id);
-
-    dispatch(DeleteOrder(order.id));
+    if (res?.data) {
+      dispatch(DeleteOrder(order.id));
+      toast.success("Order Deleted");
+    }
   }
   const x =
     new Date(order.estimatedDelivery).getMinutes() - new Date().getMinutes();

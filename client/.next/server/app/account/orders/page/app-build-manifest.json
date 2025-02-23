@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "/account/orders/page": [
+      "static/chunks/_ca681a._.js",
+      "static/chunks/app_icon_png_mjs_797d15._.js",
+      "static/chunks/node_modules_d40324._.js",
+      "static/chunks/[root of the server]__47a9da._.js",
+      "static/chunks/[root of the server]__14ed44._.css",
+      "static/chunks/app_layout_61af54.js",
+      "static/chunks/app_error_8e540f.js",
+      "static/chunks/app_error_352f93.js",
+      "static/chunks/app_not-found_57fe10.js",
+      "static/chunks/app_not-found_352f93.js",
+      "static/chunks/node_modules_react-icons_cg_index_mjs_1c0b60._.js",
+      "static/chunks/node_modules_react-icons_gi_index_mjs_5eee45._.js",
+      "static/chunks/node_modules_react-icons_ci_index_mjs_e4544c._.js",
+      "static/chunks/node_modules_react-icons_lib_74ccc9._.js",
+      "static/chunks/app_647551._.js",
+      "static/chunks/app_account_layout_352f93.js",
+      "static/chunks/app_ce4362._.js",
+      "static/chunks/app_account_orders_page_882d3f.js",
+      "static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc._.js",
+      "static/chunks/node_modules_next_dist_compiled_107ce8._.js",
+      "static/chunks/node_modules_next_dist_client_523921._.js",
+      "static/chunks/node_modules_next_dist_4bb10e._.js",
+      "static/chunks/node_modules_@swc_helpers_cjs_00636a._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_d0a96d._.js",
+      "static/chunks/_e69f0d._.js",
+      "static/chunks/_d95469._.js"
+    ]
+  }
+}

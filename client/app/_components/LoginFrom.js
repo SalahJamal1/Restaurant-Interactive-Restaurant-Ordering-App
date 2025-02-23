@@ -2,25 +2,48 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../login/userSlice";
+import { login } from "../_store/userSlice";
 import { signIn } from "../_lib/apiResto";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import Error from "../error";
 
 function LoginFrom() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   async function handelSubmit(e) {
     e.preventDefault();
 
     if (!email && !password) return;
-    const res = await signIn({ email, password });
-    if (res?.user) {
-      dispatch(login(res.user));
-      router.push("/cart");
+    try {
+      const res = await signIn({ email, password });
+      if (res.data) {
+        dispatch(login(res.data?.user));
+        toast.success("Login Successfully");
+        router.push("/cart");
+      }
+    } catch (err) {
+      console.log(err);
+      if (err.response)
+        toast.error(`${err.response.data.message}`.toLocaleUpperCase());
+      else setError("Failed to receive response 404");
     }
   }
+  if (error)
+    return (
+      <Error
+        error={error}
+        reset={() => {
+          setEmail("");
+          setPassword("");
+          setError("");
+          router.refresh();
+        }}
+      />
+    );
   return (
     <form method="POST" className="w-[25rem]" onSubmit={handelSubmit}>
       <label className="block capitalize text-xl tracking-widest mb-2">

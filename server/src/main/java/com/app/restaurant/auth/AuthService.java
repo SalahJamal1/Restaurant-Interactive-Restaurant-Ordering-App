@@ -55,9 +55,8 @@ public class AuthService {
             return AuthResponse.builder().token(jwt).user(user).build();
 
         } catch (AuthenticationException err) {
-            new RuntimeException("user or password is wrong");
+            throw new RuntimeException("user or password is wrong");
         }
-        return null;
     }
 
     public void logout(HttpServletResponse response) {

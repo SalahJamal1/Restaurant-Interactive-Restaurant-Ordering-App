@@ -5,59 +5,34 @@ const api = axios.create({
   withCredentials: true,
 });
 export async function getMenu(item) {
-  try {
-    const res = await api.get(`menu/${item}`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.get(`menu/${item}`);
+  return res;
 }
 export async function signIn(data) {
-  try {
-    const res = await api.post("auth/login", data);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.post("auth/login", data);
+  return res;
 }
 export async function signOut() {
-  try {
-    const res = await api.get("auth/logout");
-    return res;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.get("auth/logout");
+  return res;
 }
 export async function signup(data) {
-  try {
-    const res = await api.post("auth/signup", data);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.post("auth/signup", data);
+  return res;
 }
 export async function getCurrent() {
   try {
     const res = await api.get("auth/current");
     return res.data;
   } catch (err) {
-    console.log(err);
+    console.log("");
   }
 }
 export async function createOrders(data) {
-  try {
-    const res = await api.post("/orders", data);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.post("/orders", data);
+  return res;
 }
 export async function deleteOrderById(id) {
-  try {
-    const res = await api.delete(`/orders/${id}`);
-    console.log(res);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await api.delete(`/orders/${id}`);
+  return res;
 }

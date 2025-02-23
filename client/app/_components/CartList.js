@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { createOrders } from "../_lib/apiResto";
 import { ClearCart } from "../_store/cartSlice";
 import { addOrder } from "../_store/orderSlice";
+import toast from "react-hot-toast";
 
 function CartList() {
   const router = useRouter();
@@ -23,9 +24,13 @@ function CartList() {
       orderPrice: totalPrice,
     };
     const res = await createOrders(newOrder);
-    dispatch(addOrder(res));
-    dispatch(ClearCart());
-    router.push("/account/orders");
+    if (res?.data) {
+      toast.success("Order Created");
+
+      dispatch(addOrder(res.data));
+      dispatch(ClearCart());
+      router.push("/account/orders");
+    }
   }
 
   return (
@@ -34,7 +39,7 @@ function CartList() {
         href="/menu"
         className="font-semibold tracking-widest capitalize border-b-2 border-black pb-1 duration-150 transition-all hover:border-none"
       >
-        Back to menu
+        ← Back to menu
       </Link>
       {!Auth ? (
         <p className="text-center border-y border-[#FF9900] py-1 place-self-center">

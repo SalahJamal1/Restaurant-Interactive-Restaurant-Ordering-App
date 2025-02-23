@@ -31,19 +31,13 @@ function Navigation() {
               : ""
           }`}
         >
-          {<Link href={el.link}>{el.name}</Link>}
+          <Link href={el.link}>{el.name}</Link>
         </li>
       ))}
-      <li
-        className={`${
-          pathname === "/account"
-            ? " text-[#FF9900] border-b-2 border-[#FF9900]"
-            : ""
-        }`}
-      >
+      <li>
         <Link
-          href={Auth ? `/account` : "/login"}
-          className={`${Auth ? "" : "bg-[#FF9900] px-4 py-2 rounded-md"}`}
+          href={Auth ? "/account" : "/login"}
+          className="bg-[#FF9900] px-4 py-2 rounded-md"
         >
           {Auth ? "Account" : "Login"}
         </Link>

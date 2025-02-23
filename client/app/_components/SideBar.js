@@ -3,16 +3,20 @@ import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { GiRiceCooker } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
-import { logout } from "../login/userSlice";
+import { logout } from "../_store/userSlice";
 import { useDispatch } from "react-redux";
 import { signOut } from "../_lib/apiResto";
+import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 function SideBar() {
+  const pathname = usePathname();
   const dispatch = useDispatch();
   async function handelLogout(e) {
     e.preventDefault();
     const res = await signOut();
     if (res?.data === "success") {
+      toast.success("Logout Successfully");
       dispatch(logout());
     }
   }
@@ -21,7 +25,9 @@ function SideBar() {
       <li>
         <Link
           href="/account"
-          className=" capitalize text-xl tracking-widest flex gap-2"
+          className={`capitalize text-xl tracking-widest flex gap-2 pb-1 ${
+            pathname === "/account" && "border-b-2 border-[#FF9900]"
+          }`}
         >
           <CgProfile />
           account
@@ -30,7 +36,9 @@ function SideBar() {
       <li>
         <Link
           href="/account/orders"
-          className=" capitalize text-xl tracking-widest flex gap-2 "
+          className={`capitalize text-xl tracking-widest flex gap-2 pb-1 ${
+            pathname === "/account/orders" && "border-b-2 border-[#FF9900]"
+          }`}
         >
           <GiRiceCooker />
           orders

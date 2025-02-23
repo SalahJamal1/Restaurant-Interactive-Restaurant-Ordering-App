@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./_store/store";
 import UserLoader from "./_components/UserLoader";
 import CartOverView from "./_components/CartOverView";
+import { Toaster } from "react-hot-toast";
 
 const josefin = Josefin_Sans({
   weight: "variable",
@@ -23,13 +24,43 @@ function Layout({ children }) {
       >
         <Provider store={store}>
           <Suspense fallback={<Spinner />}>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+              gutter={8}
+              containerStyle={{}}
+              toastOptions={{
+                duration: 5000,
+                removeDelay: 1000,
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  background: "#363636",
+                  color: "#fff",
+                },
+                success: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: "green",
+                    secondary: "black",
+                  },
+                },
+                error: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: "red",
+                    secondary: "black",
+                  },
+                },
+              }}
+            />
             <UserLoader />
+            <Header />
+            <div className="overflow-y-scroll text-black bg-[#FFF7EA]">
+              <main className="max-w-6xl mx-auto">{children}</main>
+            </div>
+            <CartOverView />
           </Suspense>
-          <Header />
-          <div className="overflow-y-scroll text-black bg-[#FFF7EA]">
-            <main className="max-w-6xl mx-auto">{children}</main>
-          </div>
-          <CartOverView />
         </Provider>
       </body>
     </html>

@@ -24,7 +24,7 @@ function SignUpFrom() {
       email,
       password,
     });
-    if (res.user) router.push("/login");
+    if (res.data.user) router.push("/login");
   }
   return (
     <form

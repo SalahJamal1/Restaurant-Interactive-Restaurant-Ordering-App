@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch } from "react-redux";
 import { getCurrent } from "@/app/_lib/apiResto";
-import { getUser } from "@/app/login/userSlice";
+import { getUser } from "@/app/_store/userSlice";
 import { useEffect } from "react";
 
 function UserLoader() {
@@ -10,7 +10,7 @@ function UserLoader() {
     function () {
       async function getCurrentUser() {
         const res = await getCurrent();
-        if (res?.id) {
+        if (res) {
           dispatch(getUser(res));
         }
       }
