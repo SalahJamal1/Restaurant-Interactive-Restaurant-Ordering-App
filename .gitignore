@@ -33,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 .next/
+client/.next/cache/webpack/client-production/0.pack
