@@ -1,7 +1,11 @@
 package com.app.restaurant.menu;
 
+import java.util.List;
+
 public interface MenuService {
 
 
-    Menu findAll();
+    List<Menu> findAll();
+
+    Menu findByCategory(String category);
 }

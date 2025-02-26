@@ -1,9 +1,7 @@
 package com.app.restaurant.menu;
 
 
-import com.app.restaurant.burger.Burger;
-import com.app.restaurant.pizza.Pizza;
-import com.app.restaurant.shawarma.Shawarma;
+import com.app.restaurant.Item.Item;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,15 +20,9 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
-    private List<Shawarma> shawarma;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
-    private List<Pizza> pizza;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
-    private List<Burger> burger;
+    private String category;
 
-
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "menu_id")
+    private List<Item> items;
 }

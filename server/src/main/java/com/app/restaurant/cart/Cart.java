@@ -29,9 +29,9 @@ public class Cart {
     @Column(name = "image_url")
     @NotBlank
     private String imageUrl;
-    @Column(name = "ingredients")
+    @Column(name = "description")
     @NotBlank
-    private String ingredients;
+    private String description;
     @Column(name = "quantity")
     @NotNull
     @Min(value = 1, message = "Quantity must be at least 1")

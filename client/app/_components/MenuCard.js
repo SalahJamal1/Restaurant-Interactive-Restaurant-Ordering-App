@@ -6,9 +6,6 @@ import { orderNow } from "../_store/cartSlice";
 import CartOption from "./CartOption";
 
 function MenuCard({ item }) {
-  const ingredients = item.ingredients
-    ? JSON.parse(item.ingredients).join(" ,")
-    : item.description;
   const dispatch = useDispatch();
 
   const { cart } = useSelector((store) => store.cart);
@@ -19,7 +16,7 @@ function MenuCard({ item }) {
       name: item.name,
       unitPrice: item.unitPrice,
       imageUrl: item.imageUrl,
-      ingredients,
+      description: item.description,
       quantity: 1,
       totalPrice: item?.unitPrice * 1,
     };
@@ -47,7 +44,7 @@ function MenuCard({ item }) {
         </div>
 
         <p className="text-[10px] capitalize italic text-slate-500 font-semibold tracking-wider h-12">
-          {ingredients}
+          {item.description}
         </p>
         <div className="flex items-center justify-between">
           <div className="flex space-x-1">

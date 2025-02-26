@@ -1,7 +1,7 @@
 package com.app.restaurant.menu;
 
-public interface MenuRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    Menu findAll();
-
+public interface MenuRepository extends JpaRepository<Menu, Integer> {
+    Menu findByCategory(String category);
 }

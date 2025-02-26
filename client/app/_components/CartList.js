@@ -17,6 +17,7 @@ function CartList() {
   const dispatch = useDispatch();
   if (!cart.length) return <CartMessage />;
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
+
   async function handelCreateOrder(e) {
     e.preventDefault();
     const newOrder = {

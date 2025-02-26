@@ -1,4 +1,4 @@
-package com.app.restaurant.burger;
+package com.app.restaurant.Item;
 
 
 import lombok.RequiredArgsConstructor;
@@ -7,40 +7,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/burger")
+@RequestMapping("/api/v1/item")
 @RequiredArgsConstructor
-public class BurgerController {
-    private final BurgerService service;
+public class ItemController {
+    private final ItemService service;
 
     @GetMapping
-    public List<Burger> list() {
+    public List<Item> list() {
 
         return service.findAll();
 
     }
 
     @GetMapping("/{id}")
-    public Burger getBurger(@PathVariable Integer id) {
+    public Item getItem(@PathVariable Integer id) {
         return service.findById(id).orElseThrow();
     }
 
     @PostMapping
-    public Burger createBurger(@RequestBody Burger entity) {
-        return service.save(entity);
+    public List<Item> createItems(@RequestBody List<Item> entity) {
+        return service.saveAll(entity);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBurger(@PathVariable Integer id) {
-        Burger entity = service.findById(id).orElseThrow();
+    public String deleteItem(@PathVariable Integer id) {
+        Item entity = service.findById(id).orElseThrow();
 
         service.delete(entity);
         return "you are deleted the Id: " + id;
     }
 
     @PatchMapping("/{id}")
-    public Burger updateBurger(@PathVariable Integer id, @RequestBody Burger entity1) {
-        Burger entity = service.findById(id).orElseThrow();
-        entity.setIngredients(entity.getIngredients());
+    public Item updateItem(@PathVariable Integer id, @RequestBody Item entity1) {
+        Item entity = service.findById(id).orElseThrow();
+        entity.setDescription(entity1.getDescription());
         entity.setName(entity1.getName());
         entity.setImageUrl(entity1.getImageUrl());
         entity.setUnitPrice(entity1.getUnitPrice());

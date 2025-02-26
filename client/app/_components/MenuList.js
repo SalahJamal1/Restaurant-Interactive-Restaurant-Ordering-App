@@ -26,6 +26,7 @@ function MenuList({ item }) {
     },
     [item]
   );
+  console.log(menu);
   if (error)
     return (
       <Error
@@ -38,7 +39,7 @@ function MenuList({ item }) {
   return (
     <Suspense fallback={<Spinner />} key={item}>
       <ul className="grid grid-cols-3 gap-8">
-        {menu.map((item) => (
+        {menu.items?.map((item) => (
           <MenuCard key={item.id} item={item} />
         ))}
       </ul>
