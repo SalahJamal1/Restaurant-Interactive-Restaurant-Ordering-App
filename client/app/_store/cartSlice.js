@@ -10,18 +10,18 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
     },
     Incorder(state, action) {
-      const item = state.cart.find((el) => el.name === action.payload);
-      item.quantity++;
-      item.totalPrice = item.quantity * item.unitPrice;
+      const cart = state.cart.find((el) => el.item.id === action.payload);
+      cart.quantity++;
+      cart.totalPrice = cart.quantity * cart.item.unitPrice;
     },
     Decorder(state, action) {
-      const item = state.cart.find((el) => el.name === action.payload);
-      item.quantity--;
-      item.totalPrice = item.quantity * item.unitPrice;
-      if (item.quantity <= 0) cartSlice.caseReducers.DeleteItem(state, action);
+      const cart = state.cart.find((el) => el.item.id === action.payload);
+      cart.quantity--;
+      cart.totalPrice = cart.quantity * cart.item.unitPrice;
+      if (cart.quantity <= 0) cartSlice.caseReducers.DeleteItem(state, action);
     },
     DeleteItem(state, action) {
-      state.cart = state.cart.filter((el) => el.name !== action.payload);
+      state.cart = state.cart.filter((el) => el.item.id !== action.payload);
     },
     ClearCart(state) {
       state.cart = [];

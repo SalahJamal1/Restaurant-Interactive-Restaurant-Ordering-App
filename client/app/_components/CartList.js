@@ -67,8 +67,8 @@ function CartList() {
       )}
 
       <ul className="flex flex-col divide-y divide-slate-300 border-b border-slate-300">
-        {cart.map((item) => (
-          <CartItem key={item.name} item={item} />
+        {cart.map((el) => (
+          <CartItem key={el.item.id} el={el} />
         ))}
       </ul>
     </div>

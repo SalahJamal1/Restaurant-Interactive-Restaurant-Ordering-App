@@ -8,20 +8,20 @@ function CartOption({ currentCart }) {
   return (
     <div className="space-x-2 flex items-center">
       <button
-        onClick={() => dispatch(Decorder(currentCart?.name))}
+        onClick={() => dispatch(Decorder(currentCart?.item.id))}
         className="bg-[#FF9900] text-white px-[9px] h-6 text-2xl rounded-full flex items-center"
       >
         -
       </button>
       <span className="text-xl rounded-full">{currentCart?.quantity}</span>
       <button
-        onClick={() => dispatch(Incorder(currentCart?.name))}
+        onClick={() => dispatch(Incorder(currentCart?.item.id))}
         className="bg-[#FF9900] text-white px-[6px] h-6 text-2xl rounded-full flex items-center"
       >
         +
       </button>
       <button
-        onClick={() => dispatch(DeleteItem(currentCart?.name))}
+        onClick={() => dispatch(DeleteItem(currentCart?.item.id))}
         className="bg-[#FF9900] text-white px-[6px] h-6 text-xs rounded-full flex items-center"
       >
         Delete

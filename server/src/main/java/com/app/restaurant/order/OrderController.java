@@ -1,6 +1,9 @@
 package com.app.restaurant.order;
 
 
+import com.app.restaurant.Item.Item;
+import com.app.restaurant.Item.ItemService;
+import com.app.restaurant.cart.Cart;
 import com.app.restaurant.cart.CartService;
 import com.app.restaurant.user.User;
 import com.app.restaurant.user.UserRepository;
@@ -20,6 +23,7 @@ public class OrderController {
     private final OrdersService service;
     private final CartService cartService;
     private final UserRepository userRepository;
+    private final ItemService itemService;
 
     @GetMapping
     public List<Orders> list() {
@@ -39,6 +43,10 @@ public class OrderController {
     public Orders createOrders(@AuthenticationPrincipal User user, @RequestBody Orders orders) {
         if (user != null) {
             orders.setBeforeSave(user);
+            for (Cart cart : orders.getCart()) {
+                Item item = itemService.findById(cart.getItem().getId()).orElseThrow(() -> new RuntimeException("item is not exist"));
+                cart.setItem(item);
+            }
             cartService.saveAll(orders.getCart());
             user.getOrders().add(orders);
             userRepository.save(user);

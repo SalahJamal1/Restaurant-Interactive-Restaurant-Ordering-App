@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import CartOption from "./CartOption";
 import Image from "next/image";
 
-function CartItem({ item }) {
+function CartItem({ el }) {
   const { cart } = useSelector((store) => store.cart);
-
-  const currentCart = cart.find((el) => el?.name === item?.name);
+  const { item, quantity, totalPrice } = el;
+  const currentCart = cart.find((el) => el?.item.id === item.id);
   return (
     <li className="flex py-4">
       <div className="px-5 pt-4 flex-grow">
@@ -21,7 +21,7 @@ function CartItem({ item }) {
             </div>
             <div className="space-y-4  flex-1">
               <h2 className="text-base flex items-center gap-2">
-                <span className="text-xl">{item?.quantity}x</span>
+                <span className="text-xl">{quantity}x</span>
                 {item?.name}
               </h2>
               <p className="text-base capitalize items-center gap-1 flex-1">
@@ -33,7 +33,7 @@ function CartItem({ item }) {
             <CartOption currentCart={currentCart} />
             <span className="flex items-center text-xl gap-8">
               <span className="font-bold text-base">Total: </span>$
-              {Math.round(item?.totalPrice)}
+              {Math.round(totalPrice)}
             </span>
           </div>
         </div>

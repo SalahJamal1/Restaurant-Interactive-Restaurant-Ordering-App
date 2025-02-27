@@ -13,16 +13,13 @@ function MenuCard({ item }) {
     e.preventDefault();
     if (!item) return;
     const newOrder = {
-      name: item.name,
-      unitPrice: item.unitPrice,
-      imageUrl: item.imageUrl,
-      description: item.description,
+      item,
       quantity: 1,
       totalPrice: item?.unitPrice * 1,
     };
     dispatch(orderNow(newOrder));
   }
-  const currentCart = cart.find((el) => el?.name === item?.name);
+  const currentCart = cart.find((el) => el?.item.id === item?.id);
   return (
     <li className="bg-white h-[432px] w-[326px] grid grid-rows-[1fr,10rem] shadow-lg">
       <div className="relative flex-1 overflow-hidden cursor-pointer">

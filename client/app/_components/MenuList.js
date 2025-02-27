@@ -26,7 +26,6 @@ function MenuList({ item }) {
     },
     [item]
   );
-  console.log(menu);
   if (error)
     return (
       <Error

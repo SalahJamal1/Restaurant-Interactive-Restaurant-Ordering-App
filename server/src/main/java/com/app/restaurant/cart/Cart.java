@@ -1,8 +1,8 @@
 package com.app.restaurant.cart;
 
+import com.app.restaurant.Item.Item;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,18 +20,9 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name")
-    @NotBlank
-    private String name;
-    @Column(name = "unit_price")
-    @NotNull
-    private double unitPrice;
-    @Column(name = "image_url")
-    @NotBlank
-    private String imageUrl;
-    @Column(name = "description")
-    @NotBlank
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
     @Column(name = "quantity")
     @NotNull
     @Min(value = 1, message = "Quantity must be at least 1")

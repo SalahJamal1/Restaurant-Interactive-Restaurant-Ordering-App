@@ -75,21 +75,23 @@ function OrderItem({ order }) {
           </span>
         </div>
         <ul className="flex flex-col divide-y divide-slate-300 space-y-4">
-          {order?.cart?.map((item) => (
-            <li key={item.id} className="flex items-center space-x-4 py-2">
+          {order?.cart?.map((cart) => (
+            <li key={cart.item.id} className="flex items-center space-x-4 py-2">
               <Image
-                src={item.imageUrl}
-                alt={item.name}
+                src={cart.item.imageUrl}
+                alt={cart.item.name}
                 width="50"
                 height="50"
                 className="object-cover object-center rounded-full"
               />
               <div className="flex flex-col space-y-2">
                 <p className="flex items-center gap-2">
-                  <span className="text-xl">{item.quantity}x</span>
-                  <span className="font-semibold">{item.name}</span>
+                  <span className="text-xl">{cart.quantity}x</span>
+                  <span className="font-semibold">{cart.item.name}</span>
                 </p>
-                <p className="capitalize italic text-sm">{item.ingredients}</p>
+                <p className="capitalize italic text-sm">
+                  {cart.item.description}
+                </p>
               </div>
             </li>
           ))}
