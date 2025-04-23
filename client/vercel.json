@@ -1,20 +1,21 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "next.config.js",
-      "use": "@vercel/next"
+      "source": "/api/(.*)",
+      "destination": "/api/$1.js"
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/old-route",
-      "dest": "/new-route",
-      "status": 301
+      "source": "/old-route",
+      "destination": "/new-route",
+      "permanent": true
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1.js"
+      "source": "/blog",
+      "destination": "/articles",
+      "permanent": true
     }
   ],
   "headers": [
@@ -26,13 +27,6 @@
           "value": "DENY"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/blog",
-      "destination": "/articles",
-      "permanent": true
     }
   ]
 }
