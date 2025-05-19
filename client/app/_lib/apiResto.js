@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://restsalah-4b5490310b95.herokuapp.com/",
+  baseURL: "https://restsalah-4b5490310b95.herokuapp.com/api/v1/",
   withCredentials: true,
 });
 export async function getMenu(item) {
