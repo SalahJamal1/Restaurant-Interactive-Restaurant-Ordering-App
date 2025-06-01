@@ -9,6 +9,7 @@ import { store } from "./_store/store";
 import UserLoader from "./_components/UserLoader";
 import CartOverView from "./_components/CartOverView";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 
 const josefin = Josefin_Sans({
   weight: "variable",
@@ -55,6 +56,11 @@ function Layout({ children }) {
               }}
             />
             <UserLoader />
+            <Script
+              src="https://test-gateway.mastercard.com/static/checkout/checkout.min.js"
+              strategy="beforeInteractive"
+              onError={() => toast.error("Failed to load payment library")}
+            />
             <Header />
             <div className="overflow-y-scroll text-black bg-[#FFF7EA]">
               <main className="max-w-6xl mx-auto">{children}</main>

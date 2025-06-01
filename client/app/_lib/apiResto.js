@@ -30,7 +30,8 @@ export async function getCurrent() {
 }
 export async function createOrders(data) {
   try {
-    const res = await api.post("/orders", data);
+    const res = await api.post("/payments/create-session", data);
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
