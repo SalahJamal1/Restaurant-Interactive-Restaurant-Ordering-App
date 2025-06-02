@@ -57,7 +57,7 @@ function Layout({ children }) {
             />
             <UserLoader />
             <Script
-              src="https://test-gateway.mastercard.com/static/checkout/checkout.min.js"
+              src="https://test-network.mtf.gateway.mastercard.com/static/checkout/checkout.min.js"
               strategy="beforeInteractive"
               onError={() => toast.error("Failed to load payment library")}
             />
