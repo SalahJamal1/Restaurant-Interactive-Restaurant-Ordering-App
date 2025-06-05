@@ -11,7 +11,9 @@ export async function getMenu(item) {
 }
 export async function signIn(data) {
   const res = await api.post("auth/login", data);
-  localStorage.setItem("jwt", res.data.token);
+  if (typeof window !== "undefined") {
+    localStorage.setItem("jwt", res.data.token);
+  }
   return res;
 }
 export async function signOut() {
@@ -24,6 +26,10 @@ export async function signup(data) {
 }
 export async function getCurrent() {
   try {
+    if (typeof window === "undefined") {
+      throw new Error("localStorage is not available on the server");
+    }
+
     const token = localStorage.getItem("jwt");
     if (token) {
       const res = await api.get("auth/current", {

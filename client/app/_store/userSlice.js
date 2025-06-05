@@ -1,10 +1,11 @@
 const { createSlice } = require("@reduxjs/toolkit");
+const isBrowser = typeof window !== "undefined";
 
 const userSlice = createSlice({
   name: "User",
   initialState: {
     user: {},
-    Auth: localStorage.getItem("jwt") ? true : false,
+    Auth: isBrowser && localStorage.getItem("jwt") ? true : false,
   },
   reducers: {
     login(state, action) {
