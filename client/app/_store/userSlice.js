@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: "User",
   initialState: {
     user: {},
-    Auth: false,
+    Auth: localStorage.getItem("jwt") ? true : false,
   },
   reducers: {
     login(state, action) {

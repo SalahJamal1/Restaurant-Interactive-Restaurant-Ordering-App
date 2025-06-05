@@ -16,6 +16,7 @@ function SideBar() {
     e.preventDefault();
     const res = await signOut();
     if (res?.data === "success") {
+      localStorage.removeItem("jwt");
       toast.success("Logout Successfully");
       dispatch(logout());
     }

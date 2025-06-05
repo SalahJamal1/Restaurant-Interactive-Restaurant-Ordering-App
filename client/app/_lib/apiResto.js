@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://restsalah-4b5490310b95.herokuapp.com/api/v1/",
+  // baseURL: "https://restsalah-4b5490310b95.herokuapp.com/api/v1/",
+  baseURL: "http://127.0.0.1:8080/api/v1/",
   withCredentials: true,
 });
 export async function getMenu(item) {
@@ -10,6 +11,7 @@ export async function getMenu(item) {
 }
 export async function signIn(data) {
   const res = await api.post("auth/login", data);
+  localStorage.setItem("jwt", res.data.token);
   return res;
 }
 export async function signOut() {
@@ -22,10 +24,17 @@ export async function signup(data) {
 }
 export async function getCurrent() {
   try {
-    const res = await api.get("auth/current");
-    return res.data;
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      const res = await api.get("auth/current", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return res.data;
+    } else throw new Error("You are not authenticated");
   } catch (err) {
-    console.log("");
+    console.log(err.message);
   }
 }
 export async function createOrders(data) {
