@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div className="h-full w-full absolute backdrop-blur-lg top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] inset-0">
+    <div className="h-full w-full absolute backdrop-blur-lg top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] inset-0 z-20">
       <div className="load">
         <div className="hamburger">
           <div className="top-bun"></div>

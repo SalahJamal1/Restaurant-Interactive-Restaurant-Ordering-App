@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://restsalah-4b5490310b95.herokuapp.com/api/v1/",
-  // baseURL: "http://127.0.0.1:8080/api/v1/",
+  // baseURL: "https://restsalah-4b5490310b95.herokuapp.com/api/v1/",
+  baseURL: "http://127.0.0.1:8080/api/v1/",
   withCredentials: true,
 });
 export async function getMenu(item) {

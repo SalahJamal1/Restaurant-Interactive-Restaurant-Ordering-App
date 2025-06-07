@@ -8,7 +8,8 @@ import UserLoader from "./_components/UserLoader";
 import CartOverView from "./_components/CartOverView";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
-import Providers from "./_store/Providers";
+import { Provider } from "react-redux";
+import { store } from "./_store/store";
 
 const josefin = Josefin_Sans({
   weight: "variable",
@@ -58,14 +59,14 @@ function Layout({ children }) {
             strategy="beforeInteractive"
             onError={() => toast.error("Failed to load payment library")}
           />
-          <Providers>
+          <Provider store={store}>
             <UserLoader />
             <Header />
             <div className="overflow-y-scroll text-black bg-[#FFF7EA]">
               <main className="max-w-6xl mx-auto">{children}</main>
             </div>
             <CartOverView />
-          </Providers>
+          </Provider>
         </Suspense>
       </body>
     </html>

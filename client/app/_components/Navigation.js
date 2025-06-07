@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Spinner from "./Spinner";
 
 const links = [
   {
@@ -17,16 +18,28 @@ const links = [
     link: "/about",
     name: "about",
   },
+  {
+    link: "/account",
+    name: "Account",
+  },
 ];
 function Navigation() {
-  const { Auth } = useSelector((store) => store.user);
+  const { Auth, loader } = useSelector((store) => store.user);
   const [ready, setReady] = useState(false);
-
   const pathname = usePathname();
+  console.log(Auth, loader);
   useEffect(() => {
-    setReady(true);
-  }, []);
-  if (!ready) return null;
+    if (Auth === undefined) return;
+
+    if (Auth) {
+      setReady(true);
+    }
+    if (!Auth || !loader) {
+      setReady(true);
+    }
+  }, [Auth, loader]);
+
+  if (!ready) return <Spinner />;
 
   return (
     <ul className="flex space-x-12 capitalize text-xl text-[#FFF7EA]">
@@ -34,22 +47,19 @@ function Navigation() {
         <li
           key={el.name}
           className={`${
-            pathname === el.link
-              ? " text-[#FF9900] border-b-2 border-[#FF9900]"
-              : ""
+            pathname === el.link && "text-[#FF9900] border-b-2 border-[#FF9900]"
           }`}
         >
           <Link href={el.link}>{el.name}</Link>
         </li>
       ))}
-      <li>
-        <Link
-          href={Auth ? "/account" : "/login"}
-          className="bg-[#FF9900] px-4 py-2 rounded-md"
-        >
-          {Auth ? "Account" : "Login"}
-        </Link>
-      </li>
+      {!Auth && (
+        <li>
+          <Link href="/login" className={`bg-[#FF9900] px-4 py-2 rounded-md`}>
+            Login
+          </Link>
+        </li>
+      )}
     </ul>
   );
 }

@@ -21,7 +21,7 @@ function ProtectPage({ children }) {
   );
   if (!isAuthChecked) return <Spinner />;
 
-  return Auth ? children : null;
+  return isAuthChecked ? children : null;
 }
 
 export default ProtectPage;
