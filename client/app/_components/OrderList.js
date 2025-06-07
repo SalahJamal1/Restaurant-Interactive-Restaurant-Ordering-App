@@ -18,7 +18,6 @@ function OrderList() {
     },
     [dispatch, user, orders]
   );
-  console.log(orders);
   if (!orders.length) return <CartMessage />;
   return (
     <div className="px-12 space-y-2">

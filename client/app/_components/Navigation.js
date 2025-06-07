@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const links = [
@@ -18,7 +20,13 @@ const links = [
 ];
 function Navigation() {
   const { Auth } = useSelector((store) => store.user);
+  const [ready, setReady] = useState(false);
+
   const pathname = usePathname();
+  useEffect(() => {
+    setReady(true);
+  }, []);
+  if (!ready) return null;
 
   return (
     <ul className="flex space-x-12 capitalize text-xl text-[#FFF7EA]">
