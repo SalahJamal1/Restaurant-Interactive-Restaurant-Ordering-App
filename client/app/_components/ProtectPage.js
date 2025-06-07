@@ -20,7 +20,7 @@ function ProtectPage({ children }) {
     },
     [Auth, router, loader]
   );
-  if (!isAuthChecked) return <Spinner />;
+  if (loader) return <Spinner />;
 
   return Auth ? children : null;
 }
