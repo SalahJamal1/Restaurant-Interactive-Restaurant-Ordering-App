@@ -13,12 +13,12 @@ function ProtectPage({ children }) {
     function () {
       if (Auth === undefined) return;
 
-      if (!Auth) {
+      if (!Auth && !loader) {
         router.push("/");
       }
       setIsAuthChecked(true);
     },
-    [Auth, router]
+    [Auth, router, loader]
   );
   if (!isAuthChecked) return <Spinner />;
 
