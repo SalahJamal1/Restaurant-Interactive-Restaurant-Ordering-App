@@ -18,16 +18,11 @@ const links = [
     link: "/about",
     name: "about",
   },
-  {
-    link: "/account",
-    name: "Account",
-  },
 ];
 function Navigation() {
   const { Auth, loader } = useSelector((store) => store.user);
   const [ready, setReady] = useState(false);
   const pathname = usePathname();
-  console.log(Auth, loader);
   useEffect(() => {
     if (Auth === undefined) return;
 
@@ -53,10 +48,22 @@ function Navigation() {
           <Link href={el.link}>{el.name}</Link>
         </li>
       ))}
-      {!Auth && (
+      {Auth == undefined || !Auth ? (
         <li>
           <Link href="/login" className={`bg-[#FF9900] px-4 py-2 rounded-md`}>
             Login
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link
+            href="/account"
+            className={`${
+              pathname === "/account" &&
+              "text-[#FF9900] border-b-2 border-[#FF9900]"
+            }`}
+          >
+            Account
           </Link>
         </li>
       )}

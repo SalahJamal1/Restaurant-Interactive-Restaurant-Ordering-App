@@ -5,13 +5,14 @@ import { useSelector } from "react-redux";
 import Spinner from "./Spinner";
 
 function ProtectPage({ children }) {
-  const { Auth } = useSelector((store) => store.user);
+  const { Auth, loader } = useSelector((store) => store.user);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
-
+  console.log(Auth, loader);
   const router = useRouter();
   useEffect(
     function () {
       if (Auth === undefined) return;
+
       if (!Auth) {
         router.push("/");
       }
@@ -21,7 +22,7 @@ function ProtectPage({ children }) {
   );
   if (!isAuthChecked) return <Spinner />;
 
-  return isAuthChecked ? children : null;
+  return Auth ? children : null;
 }
 
 export default ProtectPage;
