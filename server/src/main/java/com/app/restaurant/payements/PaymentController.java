@@ -62,11 +62,11 @@ public class PaymentController {
                 "interaction", Map.of(
                         "operation", "PURCHASE",
                         "merchant", Map.of(
-                                "name", "Family Tree",
-                                "url", "https://www.familytree.com"
+                                "name", "Rest",
+                                "url", "https://www.rest_front.com"
                         ),
-                        "returnUrl", "https://www.familytree.com/api/v1/payment/payment-status?status=success&orderReference=" + orderReference,
-                        "cancelUrl", "https://www.familytree.com/api/v1/payment/payment-status?status=cancel&orderReference=" + orderReference),
+                        "returnUrl", "https://www.rest.com/api/v1/payment/payment-status?status=success&orderReference=" + orderReference,
+                        "cancelUrl", "https://www.rest.com/api/v1/payment/payment-status?status=cancel&orderReference=" + orderReference),
                 "order", Map.of(
                         "currency", "USD",
                         "amount", orders.getOrderPrice(),
@@ -76,5 +76,39 @@ public class PaymentController {
         HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(session, httpHeaders);
         ResponseEntity<String> response = restTemplate.postForEntity(url, httpEntity, String.class);
         return ResponseEntity.ok().body(response.getBody());
+    }
+    @GetMapping("/payment-status")
+    private ResponseEntity<?> checkPaymentStatus(@RequestParam String orderReference, @RequestParam String status) throws JsonProcessingException {
+        Order orders = ordersService.findByOrderReference(orderReference);
+        try {
+            if (status.equals("cancel")) {
+                ordersService.delete(orders.getId());
+                return ResponseEntity.status(HttpStatus.FOUND)
+                        .header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+            }
+            String url = GATEWAY_URL + "/order/" + orderReference;
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setBasicAuth(API_USERNAME, API_PASSWORD);
+            HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
+
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(response.getBody());
+            String result = jsonNode.path("result").path("gatewayCode").asText();
+            String transactionId = jsonNode.path("transaction").get(0).path("transaction").path("id").asText();
+
+            if ("CAPTURED".equalsIgnoreCase(result)) {
+                orders.setStatus(Status.PAID);
+                orders.setTransactionId(transactionId);
+                ordersService.save(orders);
+
+                return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+            }
+            ordersService.delete(orders.getId());
+            return ResponseEntity.status(404).body("Order not found. Payment may have failed.");
+        } catch (Exception e) {
+            ordersService.delete(orders.getId());
+            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+        }
     }
 }
