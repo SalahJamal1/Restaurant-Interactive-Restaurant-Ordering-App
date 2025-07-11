@@ -36,7 +36,7 @@ public class AuthController {
         return "success";
     }
 
-    @GetMapping("/current")
+    @GetMapping("/me")
     public User getCurrentUser(@AuthenticationPrincipal User user) {
 
         if (user != null) {

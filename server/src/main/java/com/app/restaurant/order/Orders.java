@@ -26,34 +26,32 @@ import java.util.List;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "customer_name")
+
     private String customerName;
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private List<Cart> cart;
-    @Column(name = "address")
+
     private String address;
-    @Column(name = "estimated_delivery")
+
     private Timestamp estimatedDelivery;
-    @Column(name = "actual_delivery")
+
     private Timestamp actualDelivery;
-    @Column(name = "order_price")
+
     @NotNull
     private double orderPrice;
-    @Column(name = "phone")
+
     private String phone;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     private Status status;
 
-    @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
 
     private String orderReferences;
+    private String transactionId;
 
 
     public void setBeforeSave(User user) {
@@ -70,7 +68,4 @@ public class Orders {
         this.status = Status.Delivered;
     }
 
-    public void addCart(List<Cart> carts) {
-        cart = carts;
-    }
 }

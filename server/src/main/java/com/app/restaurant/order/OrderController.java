@@ -38,31 +38,10 @@ public class OrderController {
     }
 
 
-    @PostMapping
-    @Transactional
-    public Orders createOrders(@AuthenticationPrincipal User user, @RequestBody Orders orders) {
-        if (user != null) {
-            orders.setBeforeSave(user);
-            for (Cart cart : orders.getCart()) {
-                Item item = itemService.findById(cart.getItem().getId()).orElseThrow(() -> new RuntimeException("item is not exist"));
-                cart.setItem(item);
-            }
-            cartService.saveAll(orders.getCart());
-            user.getOrders().add(orders);
-            userRepository.save(user);
-            return orders;
-        }
-        return null;
-
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrders(@PathVariable Integer id) {
         try {
-
-            Orders entity = service.findById(id);
-
-            service.delete(entity);
+            service.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("you are deleted the Id: " + id);
         } catch (Exception e) {
             System.out.println(e.getMessage());

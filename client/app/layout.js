@@ -4,7 +4,6 @@ import "@/app/_styles/globals.css";
 import Header from "./_components/Header";
 import { Suspense } from "react";
 import Spinner from "./_components/Spinner";
-import UserLoader from "./_components/UserLoader";
 import CartOverView from "./_components/CartOverView";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
@@ -23,51 +22,50 @@ function Layout({ children }) {
       <body
         className={`${josefin.className} relative text-slate-200 bg-white grid grid-rows-[auto_1fr_auto] h-screen`}
       >
-        <Suspense fallback={<Spinner />}>
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-            gutter={8}
-            containerStyle={{}}
-            toastOptions={{
-              duration: 5000,
-              removeDelay: 1000,
-              style: {
-                display: "flex",
-                alignItems: "center",
-                background: "#363636",
-                color: "#fff",
-              },
-              success: {
-                duration: 3000,
-                iconTheme: {
-                  primary: "green",
-                  secondary: "black",
+        <Provider store={store}>
+          <Suspense fallback={<Spinner />}>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+              gutter={8}
+              containerStyle={{}}
+              toastOptions={{
+                duration: 5000,
+                removeDelay: 1000,
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  background: "#363636",
+                  color: "#fff",
                 },
-              },
-              error: {
-                duration: 3000,
-                iconTheme: {
-                  primary: "red",
-                  secondary: "black",
+                success: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: "green",
+                    secondary: "black",
+                  },
                 },
-              },
-            }}
-          />
-          <Script
-            src="https://test-network.mtf.gateway.mastercard.com/static/checkout/checkout.min.js"
-            strategy="beforeInteractive"
-            onError={() => toast.error("Failed to load payment library")}
-          />
-          <Provider store={store}>
-            <UserLoader />
+                error: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: "red",
+                    secondary: "black",
+                  },
+                },
+              }}
+            />
+            <Script
+              src="https://test-network.mtf.gateway.mastercard.com/static/checkout/checkout.min.js"
+              strategy="beforeInteractive"
+              onError={() => toast.error("Failed to load payment library")}
+            />
             <Header />
             <div className="overflow-y-scroll text-black bg-[#FFF7EA]">
               <main className="max-w-6xl mx-auto">{children}</main>
             </div>
             <CartOverView />
-          </Provider>
-        </Suspense>
+          </Suspense>
+        </Provider>
       </body>
     </html>
   );

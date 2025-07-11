@@ -16,15 +16,10 @@ import lombok.NoArgsConstructor;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String Name;
-    @Column(name = "unit_price")
+    private String name;
     private float unitPrice;
-    @Column(name = "image_url")
     private String imageUrl;
-    @Column(name = "description")
     private String description;
     
 }

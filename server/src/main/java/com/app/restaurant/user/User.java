@@ -24,29 +24,22 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
     @NotBlank
-    @Column(name = "first_name")
     private String firstName;
     @NotBlank
-    @Column(name = "last_name")
     private String lastName;
     @NotBlank
-    @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "password")
     private String password;
-    @Column(name = "address")
     @NotBlank
     private String address;
-    @Column(name = "phone")
+
     @NotBlank
     private String phone;
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
 
+    private Role role;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<Orders> orders;

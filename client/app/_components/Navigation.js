@@ -3,38 +3,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Spinner from "./Spinner";
 
 const links = [
-  {
-    link: "/",
-    name: "Home",
-  },
-  {
-    link: "/menu",
-    name: "menu",
-  },
-  {
-    link: "/about",
-    name: "about",
-  },
+  { link: "/", name: "Home" },
+  { link: "/menu", name: "menu" },
+  { link: "/about", name: "about" },
 ];
+
 function Navigation() {
-  const { Auth, loader } = useSelector((store) => store.user);
-  const [ready, setReady] = useState(false);
   const pathname = usePathname();
+  const { Auth } = useSelector((store) => store.user);
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    if (Auth === undefined) return;
+    setMounted(true);
+  }, []);
 
-    if (Auth) {
-      setReady(true);
-    }
-    if (!Auth || !loader) {
-      setReady(true);
-    }
-  }, [Auth, loader]);
-
-  if (!ready) return <Spinner />;
+  if (!mounted) return null;
 
   return (
     <ul className="flex space-x-12 capitalize text-xl text-[#FFF7EA]">
@@ -48,9 +33,10 @@ function Navigation() {
           <Link href={el.link}>{el.name}</Link>
         </li>
       ))}
-      {Auth == undefined || !Auth ? (
+
+      {!Auth ? (
         <li>
-          <Link href="/login" className={`bg-[#FF9900] px-4 py-2 rounded-md`}>
+          <Link href="/login" className="bg-[#FF9900] px-4 py-2 rounded-md">
             Login
           </Link>
         </li>

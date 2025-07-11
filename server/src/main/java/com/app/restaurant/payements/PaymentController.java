@@ -7,18 +7,17 @@ import com.app.restaurant.cart.Cart;
 import com.app.restaurant.cart.CartService;
 import com.app.restaurant.order.Orders;
 import com.app.restaurant.order.OrdersService;
+import com.app.restaurant.order.Status;
 import com.app.restaurant.user.User;
 import com.app.restaurant.user.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.hibernate.query.Order;
+import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
@@ -65,8 +64,8 @@ public class PaymentController {
                                 "name", "Rest",
                                 "url", "https://www.rest_front.com"
                         ),
-                        "returnUrl", "https://www.rest.com/api/v1/payment/payment-status?status=success&orderReference=" + orderReference,
-                        "cancelUrl", "https://www.rest.com/api/v1/payment/payment-status?status=cancel&orderReference=" + orderReference),
+                        "returnUrl", "http:localhost:8080/api/v1/payment/payment-status?status=success&orderReference=" + orderReference,
+                        "cancelUrl", "http:localhost:8080/api/v1/payment/payment-status?status=cancel&orderReference=" + orderReference),
                 "order", Map.of(
                         "currency", "USD",
                         "amount", orders.getOrderPrice(),
@@ -79,12 +78,12 @@ public class PaymentController {
     }
     @GetMapping("/payment-status")
     private ResponseEntity<?> checkPaymentStatus(@RequestParam String orderReference, @RequestParam String status) throws JsonProcessingException {
-        Order orders = ordersService.findByOrderReference(orderReference);
+        Orders orders = ordersService.findByOrderReference(orderReference);
         try {
             if (status.equals("cancel")) {
                 ordersService.delete(orders.getId());
                 return ResponseEntity.status(HttpStatus.FOUND)
-                        .header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+                        .header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
             }
             String url = GATEWAY_URL + "/order/" + orderReference;
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -102,13 +101,13 @@ public class PaymentController {
                 orders.setTransactionId(transactionId);
                 ordersService.save(orders);
 
-                return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+                return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
             }
             ordersService.delete(orders.getId());
             return ResponseEntity.status(404).body("Order not found. Payment may have failed.");
         } catch (Exception e) {
             ordersService.delete(orders.getId());
-            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "https://www.rest_front.com").build();
+            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
         }
     }
 }

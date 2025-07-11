@@ -21,6 +21,7 @@ function LoginFrom() {
     try {
       const res = await signIn({ email, password });
       if (res.data) {
+        localStorage.setItem("jwt", res.data.token);
         dispatch(login(res.data?.user));
         toast.success("Login Successfully");
         router.push("/cart");

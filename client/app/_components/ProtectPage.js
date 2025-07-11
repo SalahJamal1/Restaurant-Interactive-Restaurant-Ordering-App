@@ -6,8 +6,6 @@ import Spinner from "./Spinner";
 
 function ProtectPage({ children }) {
   const { Auth, loader } = useSelector((store) => store.user);
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
-  console.log(Auth, loader);
   const router = useRouter();
   useEffect(
     function () {
@@ -16,7 +14,6 @@ function ProtectPage({ children }) {
       if (!Auth && !loader) {
         router.push("/");
       }
-      setIsAuthChecked(true);
     },
     [Auth, router, loader]
   );

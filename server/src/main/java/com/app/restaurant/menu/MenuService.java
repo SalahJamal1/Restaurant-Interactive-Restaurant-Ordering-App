@@ -1,11 +1,28 @@
 package com.app.restaurant.menu;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public interface MenuService {
+@Service
+@RequiredArgsConstructor
+public class MenuService  {
+    private final MenuRepository repository;
 
 
-    List<Menu> findAll();
+    public List<Menu> findAll() {
+        try {
+            return repository.findAll();
+        } catch (AuthenticationException
+                err) {
+            throw new RuntimeException("You are not authenticated");
+        }
+    }
 
-    Menu findByCategory(String category);
+
+    public Menu findByCategory(String category) {
+        return repository.findByCategory(category);
+    }
 }

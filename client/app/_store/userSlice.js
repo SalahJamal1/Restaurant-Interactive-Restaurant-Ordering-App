@@ -1,12 +1,15 @@
+import { isAuth } from "../utils/isAuth";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
+const initialState = {
+  user: {},
+  Auth: isAuth(),
+  loader: false,
+};
 const userSlice = createSlice({
   name: "User",
-  initialState: {
-    user: {},
-    Auth: false,
-    loader: false,
-  },
+  initialState,
   reducers: {
     login(state, action) {
       state.user = action.payload;

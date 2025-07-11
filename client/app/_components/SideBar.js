@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { signOut } from "../_lib/apiResto";
 import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function SideBar() {
   const pathname = usePathname();
@@ -16,11 +17,18 @@ function SideBar() {
     e.preventDefault();
     const res = await signOut();
     if (res?.data === "success") {
-      localStorage.removeItem("jwt");
       toast.success("Logout Successfully");
       dispatch(logout());
     }
   }
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <ul className="border-r border-black pt-12 pr-12 space-y-8 h-[82vh]">
       <li>
