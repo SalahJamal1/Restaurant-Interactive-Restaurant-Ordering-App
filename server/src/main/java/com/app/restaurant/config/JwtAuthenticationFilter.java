@@ -35,21 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwt = getCookie(request);
 
 
-        if (jwt == null || jwt.isBlank()) {
-            if (request.getRequestURI().matches("^/api/v1/auth/.*$") || request.getRequestURI().startsWith("/api/v1/menu") || request.getRequestURI().startsWith("/api/v1/orders")) {
-                filterChain.doFilter(request, response);
-                return;
-            } else {
-
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write("{\"status\": \"fail\",\"message\": \"You are not authenticated\"}");
-                return;
-            }
-
-        }
-
+        if (jwt != null ) {
 
         String username = jwtService.extractUsername(jwt);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -67,6 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
+        }
         filterChain.doFilter(request, response);
 
 

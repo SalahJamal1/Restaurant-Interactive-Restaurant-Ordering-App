@@ -64,8 +64,8 @@ public class PaymentController {
                                 "name", "Rest",
                                 "url", "https://www.rest_front.com"
                         ),
-                        "returnUrl", "http:localhost:8080/api/v1/payment/payment-status?status=success&orderReference=" + orderReference,
-                        "cancelUrl", "http:localhost:8080/api/v1/payment/payment-status?status=cancel&orderReference=" + orderReference),
+                        "returnUrl", "http://localhost:8080/api/v1/payments/payment-status?status=success&orderReference=" + orderReference,
+                        "cancelUrl", "http://localhost:8080/api/v1/payments/payment-status?status=cancel&orderReference=" + orderReference),
                 "order", Map.of(
                         "currency", "USD",
                         "amount", orders.getOrderPrice(),
@@ -83,7 +83,7 @@ public class PaymentController {
             if (status.equals("cancel")) {
                 ordersService.delete(orders.getId());
                 return ResponseEntity.status(HttpStatus.FOUND)
-                        .header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
+                        .header(HttpHeaders.LOCATION, "http://localhost:3000").build();
             }
             String url = GATEWAY_URL + "/order/" + orderReference;
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -101,13 +101,13 @@ public class PaymentController {
                 orders.setTransactionId(transactionId);
                 ordersService.save(orders);
 
-                return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
+                return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000").build();
             }
             ordersService.delete(orders.getId());
             return ResponseEntity.status(404).body("Order not found. Payment may have failed.");
         } catch (Exception e) {
             ordersService.delete(orders.getId());
-            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000.com").build();
+            return ResponseEntity.status(HttpStatus.FOUND).header(HttpHeaders.LOCATION, "http://localhost:3000").build();
         }
     }
 }

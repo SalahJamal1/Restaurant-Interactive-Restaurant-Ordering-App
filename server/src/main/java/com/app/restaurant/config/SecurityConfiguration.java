@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                         requestMatchers("/api/v1/menu", "api/v1/menu/**").permitAll()
                         .requestMatchers("/api/v1/orders/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/payment/**")
+                        .requestMatchers("/api/v1/payments/**")
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
