@@ -9,8 +9,6 @@ function ProtectPage({ children }) {
   const router = useRouter();
   useEffect(
     function () {
-      if (Auth === undefined) return;
-
       if (!Auth && !loader) {
         router.push("/");
       }

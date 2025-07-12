@@ -22,7 +22,13 @@ export async function signup(data) {
   return res;
 }
 export async function getCurrent() {
-  const res = await api.get("auth/me");
+  const jwt = localStorage.getItem("jwt");
+  if (!jwt) throw new Error("Your are'not Authenticated");
+  const res = await api.get("auth/me", {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
   return res;
 }
 export async function createOrders(data) {
