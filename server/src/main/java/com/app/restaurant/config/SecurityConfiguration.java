@@ -16,6 +16,7 @@ public class SecurityConfiguration {
     private final CorsConfigurationSource corsConfigurationSource;
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -31,7 +32,8 @@ public class SecurityConfiguration {
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(a->a.authenticationEntryPoint(jwtAuthEntryPoint));
         return httpSecurity.build();
     }
 }

@@ -3,13 +3,11 @@ spring:
     url: jdbc:mysql://localhost:3306/resturant_db
     username: root
     password: hello1996
-    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
   mail:
     host: sandbox.smtp.mailtrap.io
     port: 2525
