@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { IoStarSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { orderNow } from "../_store/cartSlice";
-import CartOption from "./CartOption";
+import CartOption from "../cart/CartOption";
+import { orderNow } from "../cart/cartSlice";
 
 function MenuCard({ item }) {
   const dispatch = useDispatch();

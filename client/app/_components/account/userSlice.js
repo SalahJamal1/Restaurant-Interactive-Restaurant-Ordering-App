@@ -1,4 +1,4 @@
-import { isAuth } from "../utils/isAuth";
+import { isAuth } from "../../utils/isAuth";
 
 const { createSlice } = require("@reduxjs/toolkit");
 

@@ -1,10 +1,10 @@
 "use client";
 import { Josefin_Sans } from "next/font/google";
 import "@/app/_styles/globals.css";
-import Header from "./_components/Header";
+import Header from "./_ui/Header";
 import { Suspense } from "react";
-import Spinner from "./_components/Spinner";
-import CartOverView from "./_components/CartOverView";
+import Spinner from "./_ui/Spinner";
+import CartOverView from "./_components/cart/CartOverView";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import { Provider } from "react-redux";

@@ -1,4 +1,4 @@
-import SignUpFrom from "../_components/SignUpFrom";
+import SignUpFrom from "../_components/signup/SignUpForm";
 
 export const metadata = {
   title: "SignUp - RestoNest",

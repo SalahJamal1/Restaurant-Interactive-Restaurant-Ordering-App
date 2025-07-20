@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { Decorder, DeleteItem, Incorder } from "../_store/cartSlice";
+import { Decorder, DeleteItem, Incorder } from "./cartSlice";
 
 function CartOption({ currentCart }) {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import CartList from "../_components/CartList";
+import CartList from "../_components/cart/CartList";
 
 export const metadata = {
   title: "Cart - RestoNest",

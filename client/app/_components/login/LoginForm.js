@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../_store/userSlice";
-import { signIn } from "../_lib/apiResto";
+import { login } from "../account/userSlice";
+import { signIn } from "../../_lib/apiResto";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import Error from "../error";
+import Error from "../../error";
 
-function LoginFrom() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -86,4 +86,4 @@ function LoginFrom() {
   );
 }
 
-export default LoginFrom;
+export default LoginForm;

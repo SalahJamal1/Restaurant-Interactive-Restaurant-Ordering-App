@@ -1,9 +1,5 @@
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { deleteOrderById } from "../_lib/apiResto";
-import { DeleteOrder } from "../_store/orderSlice";
-import UserLoader from "./UserLoader";
-import toast from "react-hot-toast";
+import UserLoader from "../../_ui/UserLoader";
 
 function formatDate(date) {
   return Intl.DateTimeFormat("en-us", {

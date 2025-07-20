@@ -6,14 +6,14 @@ import Spinner from "./Spinner";
 
 function ProtectPage({ children }) {
   const { Auth, loader } = useSelector((store) => store.user);
+
   const router = useRouter();
   useEffect(
     function () {
-      if (!Auth && !loader) {
-        router.push("/");
-      }
+      if (Auth === undefined) return;
+      if (!Auth) router.push("/");
     },
-    [Auth, router, loader]
+    [Auth, router]
   );
   if (loader) return <Spinner />;
 

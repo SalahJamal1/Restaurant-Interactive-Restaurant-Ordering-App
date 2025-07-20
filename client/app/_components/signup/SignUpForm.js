@@ -1,12 +1,12 @@
 "use client";
 import { useReducer, useState } from "react";
-import { signup } from "../_lib/apiResto";
+import { signup } from "../../_lib/apiResto";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_ERROR } from "../_store/userSlice";
+import { SET_ERROR } from "../account/userSlice";
 
-function SignUpFrom() {
+function SignUpForm() {
   const { errors } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [formData, setData] = useState({
@@ -167,4 +167,4 @@ function SignUpFrom() {
   );
 }
 
-export default SignUpFrom;
+export default SignUpForm;

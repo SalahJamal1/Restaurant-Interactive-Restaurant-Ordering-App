@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import ProtectPage from "../_components/ProtectPage";
-import SideBar from "../_components/SideBar";
+import ProtectPage from "../_ui/ProtectPage";
+import SideBar from "../_ui/SideBar";
 
 function Layout({ children }) {
   const [mounted, setMounted] = useState(false);

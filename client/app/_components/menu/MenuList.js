@@ -1,10 +1,11 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
-import { getMenu } from "../_lib/apiResto";
 import MenuCard from "./MenuCard";
-import Error from "../error";
-import Spinner from "./Spinner";
+
 import { useRouter } from "next/navigation";
+import { getMenu } from "@/app/_lib/apiResto";
+import Error from "@/app/error";
+import Spinner from "@/app/_ui/Spinner";
 
 function MenuList({ item }) {
   const [menu, setMenu] = useState([]);

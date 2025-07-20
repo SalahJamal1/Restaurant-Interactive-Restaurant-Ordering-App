@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { GiRiceCooker } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
-import { logout } from "../_store/userSlice";
+import { logout } from "../_components/account/userSlice";
 import { useDispatch } from "react-redux";
 import { signOut } from "../_lib/apiResto";
 import toast from "react-hot-toast";

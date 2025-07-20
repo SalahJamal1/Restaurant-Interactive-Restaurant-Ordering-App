@@ -1,10 +1,7 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
-import CartMessage from "./CartMessage";
+import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
-import { Suspense, useEffect } from "react";
-import { setOrders } from "../_store/orderSlice";
-import Spinner from "./Spinner";
+import CartMessage from "@/app/_components/cart/CartMessage";
 
 function OrderList() {
   const { user } = useSelector((store) => store.user);

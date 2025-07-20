@@ -1,4 +1,4 @@
-import OrderList from "@/app/_components/OrderList";
+import OrderList from "@/app/_components/orders/OrderList";
 
 function Page() {
   return (

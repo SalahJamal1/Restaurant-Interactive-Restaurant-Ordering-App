@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrent } from "@/app/_lib/apiResto";
-import { getUser, Loader } from "@/app/_store/userSlice";
+import { getUser, Loader } from "@/app/_components/account/userSlice";
 import { useEffect } from "react";
 import { isAuth } from "../utils/isAuth";
 

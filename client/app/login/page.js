@@ -1,4 +1,4 @@
-import LoginFrom from "../_components/LoginFrom";
+import LoginFrom from "../_components/login/LoginForm";
 
 export const metadata = {
   title: "Login - RestoNest",
