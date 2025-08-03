@@ -8,7 +8,7 @@ function OrderList() {
   const orders = user.orders ? [...user?.orders] : [];
   if (!orders.length) return <CartMessage />;
   return (
-    <div className="px-12 space-y-2">
+    <div className="px-6 space-y-2">
       <p className="text-center border-y border-[#FF9900] py-1 place-self-center">
         Your Orders {user?.firstName}
       </p>

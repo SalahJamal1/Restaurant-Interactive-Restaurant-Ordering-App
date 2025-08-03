@@ -1,17 +1,12 @@
 package com.app.restaurant.order;
 
 
-import com.app.restaurant.Item.Item;
 import com.app.restaurant.Item.ItemService;
-import com.app.restaurant.cart.Cart;
 import com.app.restaurant.cart.CartService;
-import com.app.restaurant.user.User;
 import com.app.restaurant.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,14 +22,12 @@ public class OrderController {
 
     @GetMapping
     public List<Orders> list() {
-
-        return service.findAll();
-
+        return service.findAllOrdersAndMarkAsDelivered();
     }
 
     @GetMapping("/{id}")
     public Orders getOrders(@PathVariable Integer id) {
-        return service.findById(id);
+        return service.findByIdAndMarkAsDelivered(id);
     }
 
 

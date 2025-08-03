@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.Order;
 import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class PaymentController {
         if (user != null) {
             orders.setBeforeSave(user);
             for (Cart cart : orders.getCart()) {
-                Item item = itemService.findById(cart.getItem().getId()).orElseThrow(() -> new RuntimeException("item is not exist"));
+                Item item = itemService.GetById(cart.getItem().getId());
                 cart.setItem(item);
             }
             orders.setOrderReferences(orderReference);
@@ -67,7 +66,7 @@ public class PaymentController {
                         "returnUrl", "http://localhost:8080/api/v1/payments/payment-status?status=success&orderReference=" + orderReference,
                         "cancelUrl", "http://localhost:8080/api/v1/payments/payment-status?status=cancel&orderReference=" + orderReference),
                 "order", Map.of(
-                        "currency", "USD",
+                        "currency", "JOD",
                         "amount", orders.getOrderPrice(),
                         "id", orderReference,
                         "description", "Goods and Services")
@@ -76,6 +75,7 @@ public class PaymentController {
         ResponseEntity<String> response = restTemplate.postForEntity(url, httpEntity, String.class);
         return ResponseEntity.ok().body(response.getBody());
     }
+
     @GetMapping("/payment-status")
     private ResponseEntity<?> checkPaymentStatus(@RequestParam String orderReference, @RequestParam String status) throws JsonProcessingException {
         Orders orders = ordersService.findByOrderReference(orderReference);
