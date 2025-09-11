@@ -4,8 +4,8 @@ const api = axios.create({
   baseURL: "http://127.0.0.1:8080/api/v1/",
   withCredentials: true,
 });
-export async function getMenu(item) {
-  const res = await api.get(`menu/${item}`);
+export async function getMenu(category) {
+  const res = await api.get(`items?category=${category}`);
   return res;
 }
 export async function signIn(data) {
@@ -14,8 +14,15 @@ export async function signIn(data) {
   return res;
 }
 export async function signOut() {
-  const res = await api.get("auth/logout");
-  return res;
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    const res = await api.get("auth/logout", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  }
 }
 export async function signup(data) {
   const res = await api.post("auth/signup", data);
@@ -24,7 +31,7 @@ export async function signup(data) {
 export async function getCurrent() {
   const jwt = localStorage.getItem("jwt");
   if (!jwt) throw new Error("Your are'not Authenticated");
-  const res = await api.get("auth/me", {
+  const res = await api.post("auth/refresh-token", {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },

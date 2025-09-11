@@ -1,17 +1,15 @@
 package com.app.restaurant.auth;
 
-import com.app.restaurant.order.Orders;
 import com.app.restaurant.order.OrdersService;
-import com.app.restaurant.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -21,36 +19,20 @@ public class AuthController {
     private final OrdersService ordersService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> signup(@RequestBody AuthRegister register, HttpServletResponse response) {
-        return ResponseEntity.ok(authService.register(register, response));
+    public ResponseEntity<AuthResponse> signup(@Valid @RequestBody AuthRegister register, HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(authService.register(register, request, response));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> Login(@RequestBody AuthLogin login, HttpServletResponse response) {
-        return ResponseEntity.ok(authService.login(login, response));
+    public ResponseEntity<AuthResponse> Login(@RequestBody AuthLogin login, HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(authService.login(login, request, response));
     }
 
-    @GetMapping("/logout")
-    public String Logout(HttpServletResponse response) {
-        authService.logout(response);
-        return "success";
-    }
 
-    @GetMapping("/me")
-    public User getCurrentUser(@AuthenticationPrincipal User user) {
+    @PostMapping("/refresh-token")
+    public ResponseEntity<AuthResponse> refreshToken(HttpServletRequest request, HttpServletResponse response) {
 
-        if (user != null) {
-            List<Orders> orders = user.getOrders();
-            for (Orders orders1 : orders) {
-                if (orders1.getActualDelivery() == null && Instant.now().isAfter(orders1.getEstimatedDelivery().toInstant())) {
-                    orders1.markAsDelivered();
-                    ordersService.save(orders1);
-                }
-            }
-            return user;
-        } else {
-            throw new UsernameNotFoundException("You are not authenticated");
-        }
+        return ResponseEntity.ok(authService.refreshToken(request, response));
 
     }
 }

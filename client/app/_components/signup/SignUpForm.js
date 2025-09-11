@@ -16,6 +16,7 @@ function SignUpForm() {
     phone: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
   const router = useRouter();
 
@@ -36,6 +37,11 @@ function SignUpForm() {
     if (!formData.phone.trim()) tempError.phone = "please enter the Phone";
     if (!formData.password.trim())
       tempError.password = "please enter the password";
+    Object.entries(tempError).forEach(([key, value]) => {
+      dispatch(SET_ERROR({ type: `ERROR_${key.toUpperCase()}`, value }));
+    });
+    if (!formData.confirmPassword.trim())
+      tempError.confirmPassword = "please confirm the password";
     Object.entries(tempError).forEach(([key, value]) => {
       dispatch(SET_ERROR({ type: `ERROR_${key.toUpperCase()}`, value }));
     });
@@ -158,6 +164,23 @@ function SignUpForm() {
         />
         {errors.password && (
           <p className="text-red-500 capitalize">{errors.password}</p>
+        )}
+      </div>
+      <div className="mb-4">
+        <label className="block capitalize text-xl tracking-widest mb-2">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          className="block mb-1 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[20rem]"
+          // required
+          placeholder="Password"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={onChange}
+        />
+        {errors.confirmPassword && (
+          <p className="text-red-500 capitalize">{errors.confirmPassword}</p>
         )}
       </div>
       <button className="bg-[#FF9900] px-4 py-2 rounded-md text-white font-semibold tracking-widest text-xl col-span-2">

@@ -16,8 +16,9 @@ function MenuList({ item }) {
       async function fetchMenu() {
         try {
           const res = await getMenu(item);
+          console.log(res);
           if (!res?.data) throw new Error("Failed to receive response 404");
-          setMenu(res.data);
+          setMenu(res?.data);
         } catch (err) {
           console.log(err);
           setError("Failed to receive response 404");
@@ -39,7 +40,7 @@ function MenuList({ item }) {
   return (
     <Suspense fallback={<Spinner />} key={item}>
       <ul className="grid grid-cols-3 gap-8">
-        {menu.items?.map((item) => (
+        {menu?.map((item) => (
           <MenuCard key={item.id} item={item} />
         ))}
       </ul>

@@ -21,5 +21,6 @@ public class Item {
     private float unitPrice;
     private String imageUrl;
     private String description;
+    private String category;
     
 }

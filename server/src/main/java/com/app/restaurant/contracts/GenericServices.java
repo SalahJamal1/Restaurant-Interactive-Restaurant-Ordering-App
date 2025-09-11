@@ -38,11 +38,7 @@ public class GenericServices<T, ID> implements IGenericServices<T, ID> {
 
     @Override
     public List<T> findAll() {
-        try {
             return repository.findAll();
-        } catch (AuthenticationException
-                err) {
-            throw new RuntimeException("You are not authenticated");
-        }
+
     }
 }

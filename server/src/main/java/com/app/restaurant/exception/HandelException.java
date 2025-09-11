@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -43,6 +44,18 @@ public class HandelException {
                 .time(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
                 .message(exc.getRootCause().getMessage())
+                .build();
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<AppErrorResponse> handelException(MethodArgumentNotValidException exc) {
+        String message = exc.getBindingResult().getFieldError().getDefaultMessage();
+
+        AppErrorResponse error = AppErrorResponse.builder()
+                .time(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND.value())
+                .message(message)
                 .build();
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }

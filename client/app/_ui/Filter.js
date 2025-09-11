@@ -22,9 +22,9 @@ function Filter() {
         Pizza
       </Button>
       <Button
-        onClick={() => handelfilter("shawarma")}
+        onClick={() => handelfilter("shawerma")}
         active={active}
-        item={"shawarma"}
+        item={"shawerma"}
       >
         Shawarma
       </Button>
