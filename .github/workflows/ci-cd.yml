@@ -1,0 +1,74 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: 2025
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      # Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install and build frontend
+      - name: Build Frontend
+        working-directory: client
+        run: |
+          npm ci
+          npm run build
+
+      # Setup Java (for Spring Boot)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: "temurin"
+
+      # Build backend with Maven
+      - name: Build Backend
+        working-directory: server
+        run: mvn clean package -DskipTests
+
+      # Build Docker images
+      - name: Build Docker images
+        run: |
+          docker build -t restaurant-frontend ./client
+          docker build -t restaurant-backend ./server
+
+      # Optional: Push to Docker Hub
+      - name: Push Docker images
+        if: github.ref == 'refs/heads/main'
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+        run: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker tag restaurant-frontend $DOCKER_USER/restaurant-frontend
+          docker tag restaurant-backend $DOCKER_USER/restaurant-backend
+          docker push $DOCKER_USER/restaurant-frontend
+          docker push $DOCKER_USER/restaurant-backend
