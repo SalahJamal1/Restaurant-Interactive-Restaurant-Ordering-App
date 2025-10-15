@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: restaurant
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: salah529/restaurant-frontend
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: http://backend:8080/api/v1
+            - name: NEXT_PUBLIC_ENVIRONMENT
+              value: docker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: restaurant
+spec:
+  type: LoadBalancer
+  selector:
+    app: client
+  ports:
+    - port: 3000
+      targetPort: 3000

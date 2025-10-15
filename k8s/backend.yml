@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: restaurant
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: salah529/restaurant-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-service:3306/restaurant_db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "2025"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: restaurant
+spec:
+  type: LoadBalancer
+  selector:
+    app: server
+  ports:
+    - port: 8080
+      targetPort: 8080
