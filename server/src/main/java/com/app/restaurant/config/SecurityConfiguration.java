@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                 .cors(c -> c.configurationSource(corsConfigurationSource))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.
-                        requestMatchers("api/v1/items/**").permitAll()
+                        requestMatchers("/api/v1/items/**").permitAll()
                         .requestMatchers("/api/v1/orders/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/payments/**")
