@@ -34,4 +34,4 @@ build/
 .vscode/
 .next/
 client/.next/cache/webpack/client-production/0.pack
-.DS_Store
+.DS_Store/
