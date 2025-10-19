@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: restaurant-backend
   namespace: restaurant
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: server
+      app: restaurant-backend
   template:
     metadata:
       labels:
-        app: server
+        app: restaurant-backend
     spec:
       containers:
-        - name: server
+        - name: restaurant-backend
           image: salah529/restaurant-backend:latest
           ports:
             - containerPort: 8080
@@ -34,7 +34,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: server
+    app: restaurant-backend
   ports:
     - port: 8080
       targetPort: 8080
