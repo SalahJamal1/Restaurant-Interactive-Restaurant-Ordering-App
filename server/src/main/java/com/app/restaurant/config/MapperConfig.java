@@ -1,5 +1,6 @@
 package com.app.restaurant.config;
 
+import com.app.restaurant.auth.AuthRegister;
 import com.app.restaurant.user.User;
 import com.app.restaurant.user.dto.UserDto;
 import org.mapstruct.Mapper;
@@ -8,4 +9,6 @@ import org.mapstruct.Mapper;
 public interface MapperConfig {
 
     UserDto toUserDto(User user);
+
+    User toUser(AuthRegister register);
 }

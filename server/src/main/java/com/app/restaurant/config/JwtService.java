@@ -1,12 +1,10 @@
 package com.app.restaurant.config;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -22,11 +20,11 @@ import java.util.function.Function;
 
 public class JwtService {
     @Value("${jwt.secretKey}")
-    private  String secretKey;
+    private String secretKey;
     @Value("${jwt.expire}")
-    private  long expire;
+    private long expire;
     @Value("${jwt.refresh_expire}")
-    private  long refreshExpire;
+    private long refreshExpire;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -46,27 +44,28 @@ public class JwtService {
     public Claims extractClaims(String token) {
         try {
 
-        return Jwts.parserBuilder()
-                .setSigningKey(getSecretKey())
-                .build().parseClaimsJws
-                        (token).getBody();
-        }catch (Exception e){
+            return Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())
+                    .build().parseClaimsJws
+                            (token).getBody();
+        } catch (Exception e) {
             throw new RuntimeException("Invalid token");
         }
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateAccessToken(UserDetails userDetails) {
+        return generateAccessToken(new HashMap<>(), userDetails);
     }
 
-    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        return buildToken(claims, userDetails,expire);
-    }
-    public String generateRefreshToken( UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails,refreshExpire);
+    public String generateAccessToken(Map<String, Object> claims, UserDetails userDetails) {
+        return buildToken(claims, userDetails, expire);
     }
 
-    private String buildToken(Map<String, Object> claims, UserDetails userDetails,long Expiration) {
+    public String generateRefreshToken(UserDetails userDetails) {
+        return buildToken(new HashMap<>(), userDetails, refreshExpire);
+    }
+
+    private String buildToken(Map<String, Object> claims, UserDetails userDetails, long Expiration) {
         claims.put("jti", UUID.randomUUID().toString());
         return Jwts.builder()
                 .setClaims(claims)

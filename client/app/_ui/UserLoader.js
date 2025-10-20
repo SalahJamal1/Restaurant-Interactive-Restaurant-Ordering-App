@@ -10,6 +10,7 @@ function UserLoader() {
   useEffect(
     function () {
       const token = localStorage.getItem("jwt");
+
       if (token) {
         async function getCurrentUser() {
           dispatch(Loader());
@@ -17,7 +18,7 @@ function UserLoader() {
             if (isAuth()) {
               const res = await getCurrent();
               dispatch(getUser(res.data.user));
-              localStorage.setItem("jwt", res.data.refresh_token);
+              localStorage.setItem("jwt", res.data.access_token);
             }
           } catch (err) {
             console.log(err);

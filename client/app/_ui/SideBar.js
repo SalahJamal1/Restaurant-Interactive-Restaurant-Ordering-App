@@ -15,7 +15,7 @@ function SideBar() {
   const dispatch = useDispatch();
   async function handelLogout(e) {
     e.preventDefault();
-    const res = await signOut();
+    await signOut();
     localStorage.removeItem("jwt");
     toast.success("Logout Successfully");
     dispatch(logout());

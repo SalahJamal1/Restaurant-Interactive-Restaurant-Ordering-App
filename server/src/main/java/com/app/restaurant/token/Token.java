@@ -19,13 +19,9 @@ public class Token {
     private Integer id;
     private String accessToken;
     private String refreshToken;
-    @Enumerated(EnumType.STRING)
-    private TokenType tokenType;
-    private String ipAddress;
-    private String deviceName;
     private String deviceId;
-    private boolean expired;
-    private boolean revoked;
+    private boolean expired = false;
+    private boolean revoked = false;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

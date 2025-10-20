@@ -2,7 +2,6 @@ package com.app.restaurant.utils;
 
 import com.app.restaurant.token.Token;
 import com.app.restaurant.token.TokenRepository;
-import com.app.restaurant.token.TokenType;
 import com.app.restaurant.user.User;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +16,16 @@ import java.util.UUID;
 public class Helper {
     private final TokenRepository tokenRepository;
 
+    public void buildCookie(HttpServletResponse response, String name, String value, Integer maxAge) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(maxAge * 24 * 60 * 60);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setAttribute("SameSite", "None");
+        response.addCookie(cookie);
+    }
+
     public String getDeviceId(HttpServletRequest request) {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
@@ -29,63 +38,31 @@ public class Helper {
     }
 
     public String getOrCreateDeviceId(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if ("deviceId".equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
+        var deviceId = getDeviceId(request);
+        if (deviceId != null) return deviceId;
         String newDeviceId = UUID.randomUUID().toString();
-        Cookie cookie = new Cookie("deviceId", newDeviceId);
-        cookie.setMaxAge(3600);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setAttribute("SameSite", "None");
-        response.addCookie(cookie);
+        buildCookie(response, "deviceId", newDeviceId, 365);
         return newDeviceId;
     }
 
-    public void saveUserToken(HttpServletRequest request, HttpServletResponse response, User user, String jwt, String deviceId, boolean isRefreshToken) {
-        String ipAddress = request.getHeader("X-Forwarded-For");
-        String deviceName = request.getHeader("User-Agent");
+    public void saveUserToken(HttpServletRequest request, User user, String refreshToken, String accessToken, String deviceId) {
 
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
-        }
 
         var token = Token.builder()
-                .accessToken(!isRefreshToken ? jwt : null)
+                .accessToken(accessToken)
                 .deviceId(deviceId)
-                .tokenType(isRefreshToken ? TokenType.REFRESH : TokenType.ACCESS)
-                .refreshToken(isRefreshToken ? jwt : null)
-                .ipAddress(ipAddress)
-                .deviceName(deviceName)
-                .expired(false)
-                .revoked(false)
+                .refreshToken(refreshToken)
                 .user(user)
                 .build();
         tokenRepository.save(token);
     }
 
     public void revokeAllUserTokens(User user, String deviceId) {
-        var tokens = tokenRepository.findAllValidTokenByUserAndDeviceId(user.getId(), deviceId);
-        if (tokens.isEmpty()) return;
-        tokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
-        });
-
-        tokenRepository.saveAll(tokens);
+        tokenRepository.UpdateAllValidTokenByUserAndDeviceId(user.getId(), deviceId);
 
     }
 
-    public String getJwtFromRequest(HttpServletRequest request) {
-        String auth = request.getHeader("Authorization");
-        if (auth != null && auth.startsWith("Bearer")) {
-            return auth.substring(7);
-        }
+    public String getJwtFromCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
