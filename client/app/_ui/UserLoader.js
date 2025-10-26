@@ -10,22 +10,23 @@ function UserLoader() {
   useEffect(
     function () {
       const token = localStorage.getItem("jwt");
-
+      const controller = new AbortController();
       if (token) {
         async function getCurrentUser() {
           dispatch(Loader());
           try {
             if (isAuth()) {
-              const res = await getCurrent();
+              const res = await getCurrent(controller.signal);
               dispatch(getUser(res.data.user));
               localStorage.setItem("jwt", res.data.access_token);
             }
           } catch (err) {
-            console.log(err);
+            if (err.name !== "CanceledError") console.log(err);
           }
         }
         getCurrentUser();
       }
+      return () => controller.abort();
     },
     [dispatch]
   );

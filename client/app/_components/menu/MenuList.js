@@ -13,18 +13,21 @@ function MenuList({ item }) {
   const router = useRouter();
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchMenu() {
         try {
-          const res = await getMenu(item);
-          console.log(res);
+          const res = await getMenu(item, controller.signal);
           if (!res?.data) throw new Error("Failed to receive response 404");
           setMenu(res?.data);
         } catch (err) {
-          console.log(err);
-          setError("Failed to receive response 404");
+          if (err.name !== "CanceledError") {
+            setError("Failed to receive response 404");
+            console.log(err);
+          }
         }
       }
       fetchMenu();
+      return () => controller.abort();
     },
     [item]
   );

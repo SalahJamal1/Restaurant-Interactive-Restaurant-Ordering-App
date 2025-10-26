@@ -7,8 +7,8 @@ const api = axios.create({
       : "http://localhost:8080/api/v1/",
   withCredentials: true,
 });
-export async function getMenu(category) {
-  const res = await api.get(`items?category=${category}`);
+export async function getMenu(category, signal) {
+  const res = await api.get(`items?category=${category}`, { signal });
   return res;
 }
 export async function signIn(data) {
@@ -17,7 +17,6 @@ export async function signIn(data) {
 }
 export async function signOut() {
   const res = await api.get("auth/logout");
-  console.log(res);
   return res;
 }
 
@@ -25,8 +24,8 @@ export async function signup(data) {
   const res = await api.post("auth/signup", data);
   return res;
 }
-export async function getCurrent() {
-  const res = await api.post("auth/refresh-token");
+export async function getCurrent(signal) {
+  const res = await api.post("auth/refresh-token", null, { signal });
   return res;
 }
 export async function createOrders(data) {
