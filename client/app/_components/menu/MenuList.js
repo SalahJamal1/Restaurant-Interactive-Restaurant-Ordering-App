@@ -1,54 +1,75 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
-import MenuCard from "./MenuCard";
+import Image from "next/image";
+import { IoStarSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import CartOption from "../cart/CartOption";
+import { orderNow } from "../cart/cartSlice";
 
-import { useRouter } from "next/navigation";
-import { getMenu } from "@/app/_lib/apiResto";
-import Error from "@/app/error";
-import Spinner from "@/app/_ui/Spinner";
+function MenuCard({ item }) {
+  const dispatch = useDispatch();
 
-function MenuList({ item }) {
-  const [menu, setMenu] = useState([]);
-  const [error, setError] = useState("");
-  const router = useRouter();
-  useEffect(
-    function () {
-      const controller = new AbortController();
-      async function fetchMenu() {
-        try {
-          const res = await getMenu(item, controller.signal);
-          if (!res?.data) throw new Error("Failed to receive response 404");
-          setMenu(res?.data);
-        } catch (err) {
-          if (err.name !== "CanceledError") {
-            setError("Failed to receive response 404");
-            console.log(err);
-          }
-        }
-      }
-      fetchMenu();
-      return () => controller.abort();
-    },
-    [item]
-  );
-  if (error)
-    return (
-      <Error
-        error={error}
-        reset={() => {
-          router.refresh();
-        }}
-      />
-    );
+  const { cart } = useSelector((store) => store.cart);
+  function addToCart(e) {
+    e.preventDefault();
+    if (!item) return;
+    const newOrder = {
+      item,
+      quantity: 1,
+      totalPrice: item?.unitPrice * 1,
+    };
+    dispatch(orderNow(newOrder));
+  }
+  const currentCart = cart.find((el) => el?.item.id === item?.id);
   return (
-    <Suspense fallback={<Spinner />} key={item}>
-      <ul className="grid grid-cols-3 gap-8">
-        {menu?.map((item) => (
-          <MenuCard key={item.id} item={item} />
-        ))}
-      </ul>
-    </Suspense>
+    <li className="bg-white h-[432px] w-[326px] grid grid-rows-[1fr,10rem] shadow-lg">
+      <div className="relative flex-1 overflow-hidden cursor-pointer">
+        <Image
+          fill
+          src={item?.imageUrl}
+          alt={item.name}
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,..."
+          className="flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-150"
+        />
+      </div>
+      <div className="px-5 pt-4">
+        <div className="flex justify-between mb-1">
+          <h2 className="text-base w-10/12 h-11">{item.name}</h2>
+          <span className="text-xl text-[#FF9900] font-bold">
+            ${item.unitPrice}
+          </span>
+        </div>
+
+        <p className="text-[10px] capitalize italic text-slate-500 font-semibold tracking-wider h-12">
+          {item.description}
+        </p>
+        <div className="flex items-center justify-between">
+          <div className="flex space-x-1">
+            <span className="text-base">5.0</span>
+
+            <div className="flex space-x-1 text-[#FF9900]">
+              {Array.from({ length: 5 }, (_, i) => (
+                <span key={i}>
+                  <IoStarSharp />
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {currentCart ? (
+            <CartOption currentCart={currentCart} />
+          ) : (
+            <button
+              onClick={addToCart}
+              className="bg-[#FF9900] text-white px-2 py-1"
+            >
+              order now
+            </button>
+          )}
+        </div>
+      </div>
+    </li>
   );
 }
 
-export default MenuList;
+export default MenuCard;

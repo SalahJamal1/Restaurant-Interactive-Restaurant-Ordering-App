@@ -1,12 +1,15 @@
-import { Suspense } from "react";
-import MenuList from "../_components/menu/MenuList";
+import { Suspense, use } from "react";
 import Filter from "../_ui/Filter";
 import Spinner from "../_ui/Spinner";
+import { getMenu } from "../_lib/apiResto";
+import MenuList from "../_components/menu/MenuList";
 export const metadata = {
   title: "Menu - RestoNest",
 };
-async function Page({ searchParams }) {
-  const item = (await searchParams?.item) ?? "pizza";
+function Page({ searchParams }) {
+  const item = searchParams?.item ?? "pizza";
+  const menu = use(getMenu(item))?.data;
+
   return (
     <div className="py-12">
       <div className="flex items-center flex-col">
@@ -16,7 +19,11 @@ async function Page({ searchParams }) {
         <h2 className="mb-8 text-4xl tracking-widest">Popular Dishes</h2>
         <Filter />
         <Suspense fallback={<Spinner />} key={item}>
-          <MenuList item={item} />
+          <ul className="grid grid-cols-3 gap-8">
+            {menu?.map((item) => (
+              <MenuList key={item.id} item={item} />
+            ))}
+          </ul>
         </Suspense>
       </div>
     </div>

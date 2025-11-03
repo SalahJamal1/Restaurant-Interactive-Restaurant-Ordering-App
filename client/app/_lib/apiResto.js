@@ -7,9 +7,16 @@ const api = axios.create({
       : "http://localhost:8080/api/v1/",
   withCredentials: true,
 });
-export async function getMenu(category, signal) {
-  const res = await api.get(`items?category=${category}`, { signal });
-  return res;
+export async function getMenu(category) {
+  try {
+    const res = await api.get(`items?category=${category}`);
+    return res;
+  } catch (err) {
+    const message = !err?.message
+      ? "Unable to load data. Please try again later"
+      : err.message;
+    throw new Error(message);
+  }
 }
 export async function signIn(data) {
   const res = await api.post("auth/login", data);
