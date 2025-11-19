@@ -4,16 +4,18 @@ jwt:
   refresh_expire: 86400000
 spring:
   datasource:
-    #    url: jdbc:mysql://db:3306/resturant_db
-    url: jdbc:mysql://localhost:3306/resturant_db
+    url: jdbc:mysql://localhost:3306/resturant_db?createDatabaseIfNotExist=true
     username: root
     password: 2025
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
-
     show-sql: true
-    database: mysql
 
-
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
