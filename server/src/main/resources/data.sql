@@ -1,3 +1,12 @@
+CREATE TABLE IF NOT EXISTS item (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    unitPrice FLOAT,
+    image_url VARCHAR(255),
+    description LONGTEXT,
+    category VARCHAR(255)
+);
+
 INSERT INTO item (id, description, image_url, name, unit_price, category)
 SELECT * FROM (
     SELECT 1,'Regular Mexican Shawerma Sandwich Italian bread','https://gwzjoptlprrjtsetfqwh.supabase.co/storage/v1/object/public/image/shawerma/blob_637476197378158985.webp','Regular Mexican Shawerma Sandwich',2.2,'shawerma' UNION ALL
