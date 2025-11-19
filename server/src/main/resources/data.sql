@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS item (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
-    unitPrice FLOAT,
+    unit_price FLOAT,
     image_url VARCHAR(255),
     description LONGTEXT,
     category VARCHAR(255)
