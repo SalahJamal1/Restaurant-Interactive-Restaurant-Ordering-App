@@ -6,9 +6,9 @@ import MenuList from "../_components/menu/MenuList";
 export const metadata = {
   title: "Menu - RestoNest",
 };
-function Page({ searchParams }) {
-  const item = searchParams?.item ?? "pizza";
-  const menu = use(getMenu(item))?.data;
+async function Page(props) {
+  const item = (await props.searchParams)?.item ?? "pizza";
+  const menu = await getMenu(item);
 
   return (
     <div className="py-12">

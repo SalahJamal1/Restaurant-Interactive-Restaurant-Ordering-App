@@ -15,7 +15,7 @@ export async function GetOrders(signal) {
 export async function getMenu(category) {
   try {
     const res = await api.get(`items?category=${category}`);
-    return res;
+    return res.data;
   } catch (err) {
     const message = !err?.message
       ? "Unable to load data. Please try again later"

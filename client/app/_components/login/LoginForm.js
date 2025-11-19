@@ -7,19 +7,15 @@ import { signIn } from "../../_lib/apiAuth";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Error from "../../error";
+import { useForm } from "react-hook-form";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const router = useRouter();
-  async function handelSubmit(e) {
-    e.preventDefault();
-
-    if (!email && !password) return;
+  async function onSubmit(data) {
     try {
-      const res = await signIn({ email, password });
+      const res = await signIn(data);
       if (res.data) {
         localStorage.setItem("jwt", res.data.access_token);
         dispatch(login(res.data?.user));
@@ -30,23 +26,11 @@ function LoginForm() {
       console.log(err);
       if (err.response)
         toast.error(`${err.response.data.message}`.toLocaleUpperCase());
-      else setError("Failed to receive response 404");
     }
   }
-  if (error)
-    return (
-      <Error
-        error={error}
-        reset={() => {
-          setEmail("");
-          setPassword("");
-          setError("");
-          router.refresh();
-        }}
-      />
-    );
+
   return (
-    <form method="POST" className="w-[25rem]" onSubmit={handelSubmit}>
+    <form method="POST" className="w-[25rem]" onSubmit={handleSubmit(onSubmit)}>
       <label className="block capitalize text-xl tracking-widest mb-2">
         email{" "}
       </label>
@@ -55,8 +39,7 @@ function LoginForm() {
         className="block mb-8 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[25rem]"
         placeholder="email"
         required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        {...register("email")}
       />
       <label className="block capitalize text-xl tracking-widest mb-2">
         password
@@ -64,10 +47,8 @@ function LoginForm() {
       <input
         type="password"
         className="mb-8 rounded-md px-4 py-2 outline-none bg-[#FFF7EA] border-slate-300 border-2 w-[25rem]"
-        required
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        placeholder="*******"
+        {...register("password")}
       />
       <button className="bg-[#FF9900] px-4 py-2 rounded-md text-white font-semibold tracking-widest text-xl w-full mb-6">
         Login

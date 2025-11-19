@@ -27,9 +27,10 @@ function MenuCard({ item }) {
           fill
           src={item?.imageUrl}
           alt={item.name}
+          loading="lazy"
           placeholder="blur"
           blurDataURL="data:image/webp;base64,..."
-          className="flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-150"
+          className="flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-300"
         />
       </div>
       <div className="px-5 pt-4">
