@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/resturant_db
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/resturant_db?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=2025
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
