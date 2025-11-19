@@ -8,7 +8,7 @@ export const metadata = {
 
 function Page() {
   return (
-    <div className="grid grid-cols-2 py-20 gap-24 max-w-[998px] mx-auto">
+    <div className="grid grid-cols-2 items-center justify-center h-[86vh] gap-24">
       <div className="flex flex-col items-start">
         <span className="block text-base border-y border-[#FF9900] text-[#292E36] tracking-[2px] mb-4">
           About us

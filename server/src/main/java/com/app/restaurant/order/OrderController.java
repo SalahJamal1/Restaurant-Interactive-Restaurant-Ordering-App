@@ -1,13 +1,14 @@
 package com.app.restaurant.order;
 
 
-import com.app.restaurant.Item.ItemService;
-import com.app.restaurant.cart.CartService;
-import com.app.restaurant.user.UserRepository;
+
+import com.app.restaurant.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,17 +17,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrdersService service;
-    private final CartService cartService;
-    private final UserRepository userRepository;
-    private final ItemService itemService;
+    
+
 
     @GetMapping
-    public List<Orders> list() {
-        return service.findAllOrdersAndMarkAsDelivered();
+    public List<Orders> getOrders(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "you are not logged in");
+        }
+        return service.findOrdersByUserId(user.getId());
     }
 
     @GetMapping("/{id}")
-    public Orders getOrders(@PathVariable Integer id) {
+    public Orders getOrder(@PathVariable Integer id) {
         return service.findByIdAndMarkAsDelivered(id);
     }
 

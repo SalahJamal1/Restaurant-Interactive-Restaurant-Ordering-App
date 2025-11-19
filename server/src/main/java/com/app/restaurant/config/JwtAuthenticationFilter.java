@@ -35,7 +35,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String jwt = getJwtFromHeader(request);
-        System.out.println(jwt);
         try {
             if (jwt != null) {
                 String username = jwtService.extractUsername(jwt);

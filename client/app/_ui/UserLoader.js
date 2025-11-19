@@ -1,9 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { getCurrent } from "@/app/_lib/apiResto";
+import { refresh } from "@/app/_lib/apiAuth";
 import { getUser, Loader } from "@/app/_components/account/userSlice";
 import { useEffect } from "react";
-import { isAuth } from "../utils/isAuth";
 
 function UserLoader() {
   const dispatch = useDispatch();
@@ -12,19 +11,17 @@ function UserLoader() {
       const token = localStorage.getItem("jwt");
       const controller = new AbortController();
       if (token) {
-        async function getCurrentUser() {
+        async function refreshToken() {
           dispatch(Loader());
           try {
-            if (isAuth()) {
-              const res = await getCurrent(controller.signal);
-              dispatch(getUser(res.data.user));
-              localStorage.setItem("jwt", res.data.access_token);
-            }
+            const res = await refresh(controller.signal);
+            dispatch(getUser(res.data.user));
+            localStorage.setItem("jwt", res.data.access_token);
           } catch (err) {
             if (err.name !== "CanceledError") console.log(err);
           }
         }
-        getCurrentUser();
+        refreshToken();
       }
       return () => controller.abort();
     },

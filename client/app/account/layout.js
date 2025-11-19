@@ -13,10 +13,10 @@ function Layout({ children }) {
   if (!mounted) return null;
 
   return (
-    <div className="grid grid-cols-[auto,1fr] gap-12">
+    <div className={`grid grid-cols-[60rem] place-content-center`}>
       <ProtectPage>
         <SideBar />
-        <div className="pt-4">{children}</div>
+        <div className="pt-12 pl-10 overflow-scroll">{children}</div>
       </ProtectPage>
     </div>
   );

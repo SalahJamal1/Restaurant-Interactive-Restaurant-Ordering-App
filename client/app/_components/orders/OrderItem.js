@@ -15,7 +15,7 @@ function OrderItem({ order }) {
   const x =
     new Date(order?.estimatedDelivery).getMinutes() - new Date().getMinutes();
   return (
-    <div className="border-2 mx-6 border-[#FF9900] M">
+    <div className="border-2 border-[#FF9900]">
       <div className="py-3 px-8">
         <div className="flex items-center justify-between mb-4 p-2">
           <span className="text-base font-semibold">

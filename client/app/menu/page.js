@@ -1,7 +1,7 @@
 import { Suspense, use } from "react";
 import Filter from "../_ui/Filter";
 import Spinner from "../_ui/Spinner";
-import { getMenu } from "../_lib/apiResto";
+import { getMenu } from "../_lib/apiOrder";
 import MenuList from "../_components/menu/MenuList";
 export const metadata = {
   title: "Menu - RestoNest",

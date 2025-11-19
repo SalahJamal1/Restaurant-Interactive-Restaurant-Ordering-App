@@ -40,9 +40,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
 
     private Role role;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Orders> orders;
+
 
 
     @Override

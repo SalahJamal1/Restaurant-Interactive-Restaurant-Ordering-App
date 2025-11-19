@@ -1,16 +1,18 @@
 package com.app.restaurant.order;
 
 import com.app.restaurant.contracts.GenericServices;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.List;
 
 @Service
 public class OrdersService extends GenericServices<Orders, Integer> {
-    public OrdersService(OrdersRepository repository) {
-        super(repository);
+    public OrdersRepository repository;
+
+    public OrdersService(OrdersRepository _repository) {
+        super(_repository);
+        repository = _repository;
     }
 
 
@@ -21,23 +23,14 @@ public class OrdersService extends GenericServices<Orders, Integer> {
 
     }
 
-    public List<Orders> findAllOrdersAndMarkAsDelivered() {
-        try {
-            for (Orders order : repository.findAll()) {
-                if (order.getActualDelivery() == null && Instant.now().isAfter(order.getEstimatedDelivery().toInstant())) {
-                    order.markAsDelivered();
-                    repository.save(order);
-                }
-            }
-            return repository.findAll();
-        } catch (AuthenticationException
-                err) {
-            throw new RuntimeException("You are not authenticated");
-        }
+    @Transactional
+    public List<Orders> findOrdersByUserId(Integer userId) {
+        repository.UpdateActualDelivery(userId);
+        return repository.findOrdersByUserId(userId);
     }
 
     public Orders findByOrderReference(String orderReference) {
-        return ((OrdersRepository) super.repository).findOrdersByOrderReferences(orderReference);
+        return repository.findOrdersByOrderReferences(orderReference);
 
 
     }

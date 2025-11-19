@@ -2,14 +2,13 @@ package com.app.restaurant.contracts;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class GenericServices<T, ID> implements IGenericServices<T, ID> {
-    protected final JpaRepository<T, ID> repository;
+    private final JpaRepository<T, ID> repository;
 
     @Transactional
     @Override
@@ -38,7 +37,7 @@ public class GenericServices<T, ID> implements IGenericServices<T, ID> {
 
     @Override
     public List<T> findAll() {
-            return repository.findAll();
+        return repository.findAll();
 
     }
 }

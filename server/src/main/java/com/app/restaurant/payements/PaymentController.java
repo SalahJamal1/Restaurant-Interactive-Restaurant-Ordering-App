@@ -40,14 +40,16 @@ public class PaymentController {
         String orderReference = UUID.randomUUID().toString();
         if (user != null) {
             orders.setBeforeSave(user);
+            orders.setUser(user);
             for (Cart cart : orders.getCart()) {
                 Item item = itemService.GetById(cart.getItem().getId());
                 cart.setItem(item);
             }
             orders.setOrderReferences(orderReference);
-            cartService.saveAll(orders.getCart());
-            user.getOrders().add(orders);
-            userRepository.save(user);
+            var cart = cartService.saveAll(orders.getCart());
+            orders.setCart(cart);
+            ordersService.save(orders);
+
         }
         String url = GATEWAY_URL + "/session";
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -98,6 +100,7 @@ public class PaymentController {
 
             if ("CAPTURED".equalsIgnoreCase(result)) {
                 orders.setStatus(Status.PAID);
+                orders.setPaid(true);
                 orders.setTransactionId(transactionId);
                 ordersService.save(orders);
 

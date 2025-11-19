@@ -7,7 +7,7 @@ function Header() {
     <>
       <UserLoader />
       <header className="bg-black border-b border-slate-200 shadow-lg h-[14vh]">
-        <nav className="max-w-6xl mx-auto py-3 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto py-3 flex items-center justify-between">
           <Logo />
           <Navigation />
         </nav>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../account/userSlice";
-import { signIn } from "../../_lib/apiResto";
+import { signIn } from "../../_lib/apiAuth";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Error from "../../error";

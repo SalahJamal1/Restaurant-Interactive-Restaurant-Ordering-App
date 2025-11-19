@@ -7,12 +7,15 @@ import java.util.List;
 
 @Service
 public class ItemService extends GenericServices<Item, Integer> {
-    public ItemService(ItemRepository repository) {
-        super(repository);
+    private final ItemRepository repository;
+
+    public ItemService(ItemRepository _repository) {
+        super(_repository);
+        repository = _repository;
     }
 
 
     public List<Item> findAllByCategory(String category) {
-        return ((ItemRepository) super.repository).findAllByCategory(category);
+        return repository.findAllByCategory(category);
     }
 }

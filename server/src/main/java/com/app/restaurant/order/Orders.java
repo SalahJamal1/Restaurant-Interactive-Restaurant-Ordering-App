@@ -3,6 +3,7 @@ package com.app.restaurant.order;
 
 import com.app.restaurant.cart.Cart;
 import com.app.restaurant.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,12 @@ public class Orders {
     @JoinColumn(name = "order_id")
     private List<Cart> cart;
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
     private String address;
 
     private Timestamp estimatedDelivery;
@@ -49,9 +56,9 @@ public class Orders {
 
     @CreationTimestamp
     private Timestamp createdAt;
-
     private String orderReferences;
     private String transactionId;
+    private boolean isPaid = false;
 
 
     public void setBeforeSave(User user) {

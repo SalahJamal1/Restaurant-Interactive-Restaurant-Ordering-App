@@ -1,6 +1,6 @@
 "use client";
 import { useReducer, useState } from "react";
-import { signup } from "../../_lib/apiResto";
+import { signup } from "../../_lib/apiAuth";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";

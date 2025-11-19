@@ -5,7 +5,7 @@ import Link from "next/link";
 import CartItem from "./CartItem";
 
 import toast from "react-hot-toast";
-import { createOrders } from "@/app/_lib/apiResto";
+import { createOrders } from "@/app/_lib/apiOrder";
 import { ClearCart } from "./cartSlice";
 
 function CartList() {

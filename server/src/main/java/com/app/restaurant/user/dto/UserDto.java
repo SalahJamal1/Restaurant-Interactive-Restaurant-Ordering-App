@@ -28,7 +28,6 @@ public class UserDto {
 
     private String phone;
 
-    private List<Orders> orders;
 
 
 }

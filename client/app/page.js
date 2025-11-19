@@ -6,8 +6,8 @@ export const metadata = {
 };
 function Page() {
   return (
-    <div className="grid grid-cols-2 py-2">
-      <div className="flex flex-col items-start pt-24">
+    <div className="grid grid-cols-2 h-[86vh]  items-center justify-center">
+      <div className="flex flex-col">
         <h2 className="text-6xl font-bold tracking-wide mb-8">
           Welcome to <span className="text-[#FF9900]">RestoNest</span>
         </h2>
@@ -17,7 +17,7 @@ function Page() {
         </p>
         <Link
           href="/menu"
-          className="bg-black text-[#FFF7EA] py-4 px-12 rounded-md text-xl"
+          className="bg-black text-[#FFF7EA] py-4 px-12 rounded-md text-xl place-self-start"
         >
           View Menu
         </Link>
