@@ -3,7 +3,7 @@ import { isAuth } from "../../utils/isAuth";
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-  user: {},
+  user: null,
   Auth: isAuth(),
   loader: false,
 };

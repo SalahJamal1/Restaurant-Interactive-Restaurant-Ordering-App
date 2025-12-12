@@ -8,10 +8,30 @@ export const api = axios.create({
   withCredentials: true,
 });
 
+export function validToken() {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("jwt");
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const { exp } = payload;
+      const now = Date.now() / 1000;
+      if (exp < now) {
+        localStorage.removeItem("jwt");
+        return null;
+      }
+      return token;
+    } catch {
+      localStorage.removeItem("jwt");
+      return null;
+    }
+  }
+}
+
 api.interceptors.request.use(
   async (config) => {
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("jwt");
+      const token = validToken();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -20,6 +40,7 @@ api.interceptors.request.use(
   },
   (err) => Promise.reject(err)
 );
+
 export async function signIn(data) {
   const res = await api.post("auth/login", data);
   return res;

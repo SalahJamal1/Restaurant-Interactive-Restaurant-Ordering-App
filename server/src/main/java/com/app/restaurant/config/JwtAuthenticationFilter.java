@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,8 +36,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NotNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        String jwt = getJwtFromHeader(request);
-        try {
+                String jwt = getJwtFromHeader(request);
+                System.out.println(request.getRequestURI());
+                try {
+                    if (request.getRequestURI().startsWith("/api/v1/auth")) {
+                        filterChain.doFilter(request, response);
+                        return;
+                    }
             if (jwt != null) {
                 String username = jwtService.extractUsername(jwt);
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -43,7 +50,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     var isUserTokenValid = tokenRepository.findTokenByAccessToken(jwt
                     ).map(t -> !t.isExpired() && !t.isRevoked()).orElse(false);
-                    System.out.println(isUserTokenValid);
                     if (jwtService.isTokenValid(jwt, userDetails) && isUserTokenValid) {
                         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                                 userDetails,
@@ -58,7 +64,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             log.error("Invalid JWT token for user: {}", jwt);
-            throw new RuntimeException("Invalid token");
+            Helper.responseError(response, HttpStatus.UNAUTHORIZED.value(), "Invalid token");
+            return;
         }
         filterChain.doFilter(request, response);
 

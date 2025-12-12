@@ -68,7 +68,6 @@ public class AuthService {
 
     public AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         String jwt = helper.getJwtFromCookies(request);
-
         if (jwt != null) {
             String username = jwtService.extractUsername(jwt);
             if (username != null) {

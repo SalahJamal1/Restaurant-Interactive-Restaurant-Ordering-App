@@ -1,6 +1,6 @@
 "use client";
 function Error({ error, reset }) {
-  const message = error.message ? error.message : error;
+  const message = error?.message ? error?.message : error;
   return (
     <div
       className="flex flex-col h-1/2 w-full items-center left-0 top-[18%]

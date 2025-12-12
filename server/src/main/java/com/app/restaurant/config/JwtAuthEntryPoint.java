@@ -1,5 +1,8 @@
 package com.app.restaurant.config;
 
+import com.app.restaurant.utils.Helper;
+import com.fasterxml.jackson.core.exc.StreamWriteException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,9 +13,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
@@ -21,13 +22,9 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException)
             throws IOException, ServletException {
-        response.setStatus((HttpStatus.UNAUTHORIZED.value()));
-        response.setContentType("application/json");
-        ObjectMapper  objectMapper = new ObjectMapper();
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put(("status"), HttpStatus.UNAUTHORIZED.value());
-        map.put(("message"), authException.getMessage());
-    objectMapper.writeValue(response.getWriter(), map);
+        Helper.responseError(response, HttpStatus.UNAUTHORIZED.value(),authException.getMessage());
 
     }
+
+    
 }

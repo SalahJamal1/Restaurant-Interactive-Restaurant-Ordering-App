@@ -24,7 +24,7 @@ const orderSlice = createSlice({
   name: "Order",
   initialState: {
     orders: [],
-    loading: false,
+    loading: true,
     error: "",
   },
   extraReducers: (b) =>

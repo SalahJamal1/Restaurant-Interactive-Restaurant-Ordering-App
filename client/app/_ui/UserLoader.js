@@ -1,28 +1,31 @@
 "use client";
-import { useDispatch } from "react-redux";
-import { refresh } from "@/app/_lib/apiAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { refresh, validToken } from "@/app/_lib/apiAuth";
 import { getUser, Loader } from "@/app/_components/account/userSlice";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 function UserLoader() {
   const dispatch = useDispatch();
+  const { loader, Auth } = useSelector((store) => store.user);
   useEffect(
     function () {
-      const token = localStorage.getItem("jwt");
+      const token = validToken();
+      if (!token) return;
+      dispatch(Loader());
       const controller = new AbortController();
-      if (token) {
-        async function refreshToken() {
-          dispatch(Loader());
-          try {
-            const res = await refresh(controller.signal);
-            dispatch(getUser(res.data.user));
-            localStorage.setItem("jwt", res.data.access_token);
-          } catch (err) {
-            if (err.name !== "CanceledError") console.log(err);
+      (async () => {
+        try {
+          const res = await refresh(controller.signal);
+          dispatch(getUser(res.data.user));
+          localStorage.setItem("jwt", res.data.access_token);
+        } catch (err) {
+          if (err.code !== "ERR_CANCELED" && err.name !== "CanceledError") {
+            console.log(err);
           }
         }
-        refreshToken();
-      }
+      })();
+
       return () => controller.abort();
     },
     [dispatch]

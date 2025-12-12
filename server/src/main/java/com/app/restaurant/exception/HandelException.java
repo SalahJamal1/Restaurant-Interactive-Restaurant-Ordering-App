@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class HandelException {
 
-    @ExceptionHandler
+    @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<AppErrorResponse> handelException(NoHandlerFoundException exc) {
         AppErrorResponse error = AppErrorResponse.builder()
                 .time(LocalDateTime.now())
@@ -26,7 +26,7 @@ public class HandelException {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<AppErrorResponse> handelException(RuntimeException exc) {
         AppErrorResponse error = AppErrorResponse.builder()
                 .time(LocalDateTime.now())
@@ -36,7 +36,7 @@ public class HandelException {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<AppErrorResponse> handelException(DataIntegrityViolationException exc) {
 
 
@@ -48,7 +48,7 @@ public class HandelException {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<AppErrorResponse> handelException(MethodArgumentNotValidException exc) {
         String message = exc.getBindingResult().getFieldError().getDefaultMessage();
 

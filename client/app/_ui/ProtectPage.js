@@ -6,16 +6,18 @@ import Spinner from "./Spinner";
 
 function ProtectPage({ children }) {
   const { Auth, loader } = useSelector((store) => store.user);
+  const [mount, setMount] = useState(true);
 
   const router = useRouter();
   useEffect(
     function () {
-      if (Auth === undefined) return;
-      if (!Auth) router.push("/");
+      if (Auth === false) router.push("/");
+      setMount(false);
     },
     [Auth, router]
   );
-  if (loader) return <Spinner />;
+
+  if (loader || mount || Auth === undefined) return <Spinner />;
 
   return Auth ? children : null;
 }
