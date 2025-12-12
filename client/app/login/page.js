@@ -1,7 +1,7 @@
 import LoginFrom from "../_components/login/LoginForm";
 
 export const metadata = {
-  title: "Login - RestoNest",
+  title: "Login",
 };
 function Page() {
   return (

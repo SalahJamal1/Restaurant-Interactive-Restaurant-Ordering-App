@@ -3,7 +3,7 @@ import Link from "next/link";
 import image from "@/public/Image 2.png";
 
 export const metadata = {
-  title: "About - RestoNest",
+  title: "About",
 };
 
 function Page() {

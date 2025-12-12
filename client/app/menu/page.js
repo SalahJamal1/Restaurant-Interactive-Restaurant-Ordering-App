@@ -4,7 +4,7 @@ import Spinner from "../_ui/Spinner";
 import { getMenu } from "../_lib/apiOrder";
 import MenuList from "../_components/menu/MenuList";
 export const metadata = {
-  title: "Menu - RestoNest",
+  title: "Menu",
 };
 async function Page(props) {
   const item = (await props.searchParams)?.item ?? "pizza";

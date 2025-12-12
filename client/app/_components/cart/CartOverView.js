@@ -10,7 +10,7 @@ function CartOverView() {
   const quantity = cart.reduce((a, b) => a + b.quantity, 0);
   const totalPrice = cart.reduce((a, b) => a + b.totalPrice, 0);
   return (
-    <div className="bg-black px-12 py-4 flex items-center  justify-between">
+    <div className="bg-black px-12 py-4 flex items-center  justify-between text-slate-100">
       <div className="flex items-center space-x-8">
         <p className="text-xl flex gap-1 capitalize">
           <span>{quantity}</span>

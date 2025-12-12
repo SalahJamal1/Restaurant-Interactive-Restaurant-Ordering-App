@@ -11,6 +11,13 @@ const josefin = Josefin_Sans({
   display: "swap",
 });
 
+export const metadata = {
+  title: {
+    default: "RestoNest",
+    template: "%s - RestoNest",
+  },
+};
+
 function Layout({ children }) {
   return (
     <html lang="en">
