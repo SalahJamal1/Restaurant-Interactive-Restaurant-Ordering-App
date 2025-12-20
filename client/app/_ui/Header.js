@@ -1,10 +1,5 @@
-import dynamic from "next/dynamic";
 import Logo from "./Logo";
-import Spinner from "./Spinner";
-const Navigation = dynamic(() => import("./Navigation"), {
-  loading: () => <Spinner />,
-  ssr: false,
-});
+import Navigation from "./Navigation";
 
 function Header() {
   return (

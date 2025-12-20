@@ -48,7 +48,7 @@ function MenuCard({ item }) {
           <div className="flex space-x-1">
             <span className="text-base">5.0</span>
 
-            <div className="flex space-x-1 text-[#FF9900]">
+            <div className="flex items-center space-x-1 text-[#FF9900]">
               {Array.from({ length: 5 }, (_, i) => (
                 <span key={i}>
                   <IoStarSharp />

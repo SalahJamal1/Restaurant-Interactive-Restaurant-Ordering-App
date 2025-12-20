@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Spinner from "./Spinner";
 
@@ -11,13 +11,14 @@ function ProtectPage({ children }) {
   const router = useRouter();
   useEffect(
     function () {
+      if (Auth === undefined) return;
       if (Auth === false) router.push("/");
       setMount(false);
     },
     [Auth, router]
   );
 
-  if (loader || mount || Auth === undefined) return <Spinner />;
+  if (loader || mount) return <Spinner />;
 
   return Auth ? children : null;
 }

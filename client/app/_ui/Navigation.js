@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Spinner from "./Spinner";
 
 const links = [
   { link: "/", name: "Home" },
@@ -12,15 +14,18 @@ const links = [
 function Navigation() {
   const pathname = usePathname();
   const { Auth, user } = useSelector((store) => store.user);
-
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (user === undefined || user === null) return;
+    setLoading(false);
+  }, [user]);
+  if (loading) return <Spinner />;
   return (
     <ul className="flex space-x-12 capitalize text-xl text-[#FFF7EA]">
       {links.map((el) => (
         <li
           key={el.name}
-          className={`${
-            pathname === el.link && "text-[#FF9900] border-b-2 border-[#FF9900]"
-          }`}
+          className={`${pathname === el.link && "text-[#FF9900]"}`}
         >
           <Link href={el.link}>{el.name}</Link>
         </li>
@@ -36,10 +41,7 @@ function Navigation() {
         <li>
           <Link
             href="/account"
-            className={`${
-              pathname === "/account" &&
-              "text-[#FF9900] border-b-2 border-[#FF9900]"
-            }`}
+            className={`${pathname === "/account" && "text-[#FF9900]"}`}
           >
             {/* Account */}
             {user?.firstName}

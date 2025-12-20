@@ -68,7 +68,7 @@ public class PaymentController {
                         "returnUrl", "http://localhost:8080/api/v1/payments/payment-status?status=success&orderReference=" + orderReference,
                         "cancelUrl", "http://localhost:8080/api/v1/payments/payment-status?status=cancel&orderReference=" + orderReference),
                 "order", Map.of(
-                        "currency", "JOD",
+                        "currency", "USD",
                         "amount", orders.getOrderPrice(),
                         "id", orderReference,
                         "description", "Goods and Services")
