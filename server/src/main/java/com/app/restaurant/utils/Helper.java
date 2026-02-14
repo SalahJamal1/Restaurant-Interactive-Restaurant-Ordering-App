@@ -35,7 +35,7 @@ public class Helper {
                 .path("/")
                 .httpOnly(true)
                 .secure(true)
-                .sameSite("Strict").build();
+                .sameSite("None").build();
 
         response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
     }
