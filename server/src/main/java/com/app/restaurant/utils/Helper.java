@@ -37,7 +37,7 @@ public class Helper {
                 .secure(true)
                 .sameSite("None").build();
 
-        response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE,cookie.toString());
     }
 
     public String getDeviceId(HttpServletRequest request) {
