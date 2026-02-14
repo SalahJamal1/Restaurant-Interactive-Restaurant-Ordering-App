@@ -13,13 +13,15 @@ const links = [
 
 function Navigation() {
   const pathname = usePathname();
-  const { Auth, user } = useSelector((store) => store.user);
+  const { Auth, user, loader } = useSelector((store) => store.user);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (user === undefined || user === null) return;
+    if (Auth === undefined) return;
     setLoading(false);
-  }, [user]);
-  if (loading) return <Spinner />;
+  }, [Auth]);
+
+  if (loading || loader) return <Spinner />;
   return (
     <ul className="flex space-x-12 capitalize text-xl text-[#FFF7EA]">
       {links.map((el) => (

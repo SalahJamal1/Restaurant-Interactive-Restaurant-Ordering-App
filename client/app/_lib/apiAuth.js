@@ -4,7 +4,7 @@ export const api = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_ENVIRONMENT === "docker"
       ? process.env.NEXT_PUBLIC_API_URL
-      : "http://localhost:8080/api/v1/",
+      : "https://restaurant-interactive-restaurant.onrender.com/api/v1/",
   withCredentials: true,
 });
 
@@ -38,7 +38,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (err) => Promise.reject(err)
+  (err) => Promise.reject(err),
 );
 
 export async function signIn(data) {
