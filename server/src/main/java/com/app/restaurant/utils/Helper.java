@@ -12,7 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
@@ -27,14 +30,14 @@ public class Helper {
     private final TokenRepository tokenRepository;
 
     public void buildCookie(HttpServletResponse response, String name, String value, Integer maxAge) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setMaxAge(maxAge * 24 * 60 * 60);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        ResponseCookie cookie = ResponseCookie.from(name, value)
+                .maxAge(maxAge * 24 * 60 * 60)
+                .path("/")
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("Strict").build();
 
-        cookie.setAttribute("SameSite", "Strict");
-        response.addCookie(cookie);
+        response.setHeader(HttpHeaders.SET_COOKIE,cookie.toString());
     }
 
     public String getDeviceId(HttpServletRequest request) {
