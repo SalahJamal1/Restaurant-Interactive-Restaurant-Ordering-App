@@ -32,7 +32,8 @@ public class Helper {
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
-        cookie.setAttribute("SameSite", "None");
+
+        cookie.setAttribute("SameSite", "Strict");
         response.addCookie(cookie);
     }
 

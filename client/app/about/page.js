@@ -34,6 +34,7 @@ function Page() {
         className=" justify-self-end"
         src={image}
         alt="image"
+        onLoad={(e) => e.currentTarget.classList.add("loaded")}
       />
     </div>
   );

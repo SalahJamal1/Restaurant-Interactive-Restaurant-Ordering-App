@@ -28,6 +28,7 @@ function MenuCard({ item }) {
           src={item?.imageUrl}
           alt={item.name}
           loading="lazy"
+          onLoad={(e) => e.currentTarget.classList.add("loaded")}
           placeholder="blur"
           blurDataURL="data:image/webp;base64,..."
           className="flex-1 object-cover object-top hover:scale-[1.5] transition-all duration-300"

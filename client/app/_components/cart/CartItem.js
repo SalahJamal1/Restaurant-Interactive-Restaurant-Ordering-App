@@ -16,6 +16,7 @@ function CartItem({ el }) {
                 fill
                 src={item.imageUrl}
                 alt={item.name}
+                onLoad={(e) => e.currentTarget.classList.add("loaded")}
                 className="object-cover rounded-full"
               />
             </div>

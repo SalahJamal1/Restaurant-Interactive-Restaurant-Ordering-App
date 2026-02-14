@@ -15,7 +15,10 @@ h1 {
   margin-top: 15px;
   font-family: "Pacifico", cursive;
   color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
     1px 1px 0 #000;
 }
 
@@ -407,4 +410,17 @@ h1 {
   100% {
     transform: scale(1) translate(5px, 85px);
   }
+}
+
+img {
+  opacity: 0;
+  filter: blur(10px);
+  transition:
+    1s opacity ease-in-out 1s,
+    1s filter ease-in-out 1s;
+}
+
+img.loaded {
+  opacity: 1;
+  filter: blur(0);
 }

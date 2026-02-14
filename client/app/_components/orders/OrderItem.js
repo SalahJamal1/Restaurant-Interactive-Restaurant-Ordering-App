@@ -60,6 +60,7 @@ function OrderItem({ order }) {
                 alt={cart?.item?.name}
                 width="50"
                 height="50"
+                onLoad={(e) => e.currentTarget.classList.add("loaded")}
                 className="object-cover object-center rounded-full"
               />
               <div className="flex flex-col space-y-2">
