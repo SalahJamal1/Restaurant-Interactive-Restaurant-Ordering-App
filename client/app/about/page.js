@@ -1,3 +1,4 @@
+// "use client";
 import Image from "next/image";
 import Link from "next/link";
 import image from "@/public/Image 2.png";
@@ -31,10 +32,10 @@ function Page() {
 
       <Image
         placeholder="blur"
-        className=" justify-self-end"
+        className=" justify-self-end loaded"
         src={image}
         alt="image"
-        onLoad={(e) => e.currentTarget.classList.add("loaded")}
+        // onLoad={(e) => e.currentTarget.classList.add("loaded")}
       />
     </div>
   );

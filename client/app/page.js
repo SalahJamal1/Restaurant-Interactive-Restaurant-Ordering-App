@@ -26,8 +26,8 @@ function Page() {
         placeholder="blur"
         src={image}
         alt="image"
-        onLoad={(e) => e.currentTarget.classList.add("loaded")}
-        className="max-h-[480px] opacity-75"
+        // onLoad={(e) => e.currentTarget.classList.add("loaded")}
+        className="max-h-[480px] opacity-75 loaded"
       />
     </div>
   );

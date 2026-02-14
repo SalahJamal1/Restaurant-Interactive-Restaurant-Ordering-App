@@ -416,8 +416,8 @@ img {
   opacity: 0;
   filter: blur(10px);
   transition:
-    1s opacity ease-in-out 1s,
-    1s filter ease-in-out 1s;
+    opacity ease-in-out 1s,
+    filter ease-in-out 1s;
 }
 
 img.loaded {
