@@ -51,7 +51,7 @@ public class AppConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("https://restaurant-three-kohl.vercel.app", "http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("https://restaurant-three-kohl.vercel.app", "https://restaurant-interactive-restaurant-etdj.onrender.com","http://localhost:3000"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Set-Cookie"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
